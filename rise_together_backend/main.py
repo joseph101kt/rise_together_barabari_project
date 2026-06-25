@@ -2,10 +2,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from core.database import Base
-from core.database import engine
+from  app.core.database import Base
+from  app.core.database import engine
 
-import models
+import  app.models as models
 
 
 @asynccontextmanager
