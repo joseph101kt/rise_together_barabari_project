@@ -1,28 +1,40 @@
 from contextlib import asynccontextmanager
-from pathlib import Path
-
 
 from fastapi import FastAPI
 from sqlalchemy import text
 
 import app.models  # noqa: F401 — registers all models with Base before create_all runs
+from app.api import api_router
 from app.core.database import Base, SessionLocal, engine
 
 
-# SQL for the module_card_view.
-# CREATE OR REPLACE VIEW is safe to run every startup — it's idempotent.
-MODULE_CARD_VIEW_SQL = (
-    Path(__file__).parent / "sql" / "module_card_view.sql"
-).read_text(encoding="utf-8")
+MODULE_CARD_VIEW_SQL = """
+CREATE OR REPLACE VIEW module_card_view AS
+SELECT
+    m.id,
+    m.parent_id,
+    m.module_type,
+    m.title,
+    m.description,
+    m.estimated_completion_time,
+    m.created_by,
+    m.order_index,
+    m.created_at,
+    m.updated_at,
+    COUNT(DISTINCT ml.link_id)     AS resource_count,
+    COUNT(DISTINCT ms.skill_id)    AS skill_count,
+    COUNT(DISTINCT mstar.user_id)  AS star_count
+FROM modules m
+LEFT JOIN module_links  ml    ON ml.module_id    = m.id
+LEFT JOIN module_skills ms    ON ms.module_id    = m.id
+LEFT JOIN module_stars  mstar ON mstar.module_id = m.id
+GROUP BY m.id;
+"""
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # --- startup ---
-    # Create all tables that don't exist yet.
-    # Safe to run every time — won't touch existing tables.
     Base.metadata.create_all(bind=engine)
-
     # Create the module_card_view SQL view.
     with SessionLocal() as db:
         try:
@@ -32,15 +44,14 @@ async def lifespan(app: FastAPI):
             db.rollback()
             raise
 
-    yield
-    # --- shutdown (nothing needed for MVP) ---
-
 
 app = FastAPI(
     title="Rise Together API",
     version="0.1.0",
     lifespan=lifespan,
 )
+
+app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/health")
