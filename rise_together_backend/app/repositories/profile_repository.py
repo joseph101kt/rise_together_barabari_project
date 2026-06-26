@@ -1,21 +1,20 @@
 """
 ProfileRepository
 
-Implements the user_profile_view as a Python method rather than a SQL view
-because education, experience, and skills are variable-length arrays that
-are cleaner to assemble in Python than with json_agg.
+Read side: get_full_profile (the user_profile_view equivalent)
+Write side: upsert_profile, upsert_education, upsert_experience, upsert_profile_links
 
-Returns:
-    {
-        "user":         {},
-        "profile":      {},
-        "education":    [],
-        "experience":   [],
-        "skills":       [],
-        "profileLinks": []
-    }
+Education, experience, and profile links all use a full-replace strategy:
+delete the user's existing rows, then bulk-insert the new list.
+This keeps the write logic simple for MVP.
 """
 
+from app.models.education import Education
+from app.models.experience import Experience
+from app.models.enums import LinkType
+from app.models.link import Link
+from app.models.user_profile import UserProfile
+from app.models.user_profile_link import UserProfileLink
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
@@ -117,3 +116,74 @@ class ProfileRepository:
             "skills":       [dict(r) for r in skill_rows],
             "profileLinks": [dict(r) for r in link_rows],
         }
+
+    # ------------------------------------------------------------------
+    # Write side
+    # ------------------------------------------------------------------
+
+    def upsert_profile(self, user_id: int, headline: str | None, bio: str | None) -> None:
+        """
+        Insert or update the user_profiles row for this user.
+        Creates the row if it doesn't exist yet.
+        """
+        existing = self.db.query(UserProfile).filter(UserProfile.user_id == user_id).first()
+        if existing:
+            existing.headline = headline
+            existing.bio = bio
+        else:
+            self.db.add(UserProfile(user_id=user_id, headline=headline, bio=bio))
+        self.db.flush()
+
+    def upsert_education(self, user_id: int, entries: list[dict]) -> None:
+        """
+        Full replace: deletes all education rows for this user then inserts new ones.
+        Each entry dict: { institution, degree?, field_of_study?, start_date?, end_date?, description? }
+        Pass an empty list to clear all education.
+        """
+        self.db.query(Education).filter(Education.user_id == user_id).delete()
+        for entry in entries:
+            self.db.add(Education(user_id=user_id, **entry))
+        self.db.flush()
+
+    def upsert_experience(self, user_id: int, entries: list[dict]) -> None:
+        """
+        Full replace: deletes all experience rows for this user then inserts new ones.
+        Each entry dict: { company, role, description?, start_date?, end_date? }
+        Pass an empty list to clear all experience.
+        """
+        self.db.query(Experience).filter(Experience.user_id == user_id).delete()
+        for entry in entries:
+            self.db.add(Experience(user_id=user_id, **entry))
+        self.db.flush()
+
+    def upsert_profile_links(self, user_id: int, links: list[dict]) -> None:
+        """
+        Full replace for profile links.
+        Each dict: { title, url, link_type, description? }
+        Creates new Link rows and UserProfileLink join rows.
+        Old join rows and their orphaned links are deleted first.
+        """
+        # Delete old join rows and the link rows they pointed to
+        old_joins = (
+            self.db.query(UserProfileLink)
+            .filter(UserProfileLink.user_id == user_id)
+            .all()
+        )
+        old_link_ids = [j.link_id for j in old_joins]
+        self.db.query(UserProfileLink).filter(UserProfileLink.user_id == user_id).delete()
+        if old_link_ids:
+            self.db.query(Link).filter(Link.id.in_(old_link_ids)).delete()
+
+        # Insert new links and join rows
+        for link_data in links:
+            link = Link(
+                title=link_data["title"],
+                url=link_data["url"],
+                link_type=LinkType(link_data["link_type"]),
+                description=link_data.get("description"),
+                created_by=user_id,
+            )
+            self.db.add(link)
+            self.db.flush()
+            self.db.add(UserProfileLink(user_id=user_id, link_id=link.id))
+        self.db.flush()
