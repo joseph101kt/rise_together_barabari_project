@@ -2,7 +2,7 @@ from app.models.user import User
 from app.models.user_profile import UserProfile
 from app.models.education import Education
 from app.models.experience import Experience
-from app.models.skill import Skill
+from app.models.skill import Skill, UserSkill  
 from app.models.module import Module
 from app.models.link import Link
 from app.models.link_review import LinkReview
@@ -28,4 +28,5 @@ __all__ = [
     "UserModule",
     "UserModuleLink",
     "UserProfileLink",
+    "UserSkill",
 ]
