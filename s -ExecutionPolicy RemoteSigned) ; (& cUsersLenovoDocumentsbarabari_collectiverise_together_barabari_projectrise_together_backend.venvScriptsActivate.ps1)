@@ -1,0 +1,80 @@
+[33mcommit 9442c26b3f1e9d39208ad36c32865a12346dfe84[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbackend[m[33m, [m[1;31morigin/backend[m[33m)[m
+Author: Joseph K <joseph101kt@gmail.com>
+Date:   Fri Jun 26 08:55:58 2026 +0530
+
+    chore(repository): scaffold repository layer and database tooling
+    
+    - Create repository structure for modules, profiles, and progress
+    - Add SQL directory for custom queries and views
+    - Add database seed script
+    - Update configuration and database initialization
+    - Register repository modules
+    
+    Next:
+    - Implement SQL views
+    - Build Pydantic schemas
+    - Create service layer
+
+[33mcommit 483c5bec202daa422cba410a472c7488bc2f6c53[m
+Author: Joseph K <joseph101kt@gmail.com>
+Date:   Thu Jun 25 20:12:25 2026 +0530
+
+    feat(database): implement initial PostgreSQL schema and ORM models
+    
+    - Configure SQLAlchemy engine and session management
+    - Implement core entities and relationship tables
+    - Add enums, relationships, and model registration
+    - Create PostgreSQL database and generate schema
+    - Verify connectivity and table creation
+    
+    Next:
+    - Pydantic schemas
+    - Repositories
+    - Services
+    - API endpoints
+
+[33mcommit 843471b681e43cbcbd5319fdf868053f0b6d87c2[m
+Author: Joseph K <joseph101kt@gmail.com>
+Date:   Thu Jun 25 19:15:06 2026 +0530
+
+    feat(database): establish PostgreSQL development environment
+    
+        Context:
+        - Set up the database foundation for the Rise Together backend
+        - Prepare local development environment for SQLAlchemy integration
+    
+        PostgreSQL Setup:
+        - Installed PostgreSQL 18
+        - Verified PostgreSQL service availability
+        - Configured local PostgreSQL instance
+        - Created rise_together database
+        - Verified database connectivity through psql
+    
+        Development Environment:
+        - Created backend virtual environment
+        - Installed required Python dependencies
+        - Configured environment variable structure
+        - Added application configuration management
+    
+        Database Foundation:
+        - Added SQLAlchemy engine configuration
+        - Added session management setup
+        - Added declarative Base definition
+        - Added reusable database dependency structure
+    
+        Validation:
+        - Confirmed PostgreSQL accepts connections
+        - Confirmed authentication credentials
+        - Confirmed successful connection to rise_together database
+    
+        Next Steps:
+        - Implement database models
+        - Define application schema
+        - Generate database tables from SQLAlchemy models
+        - Build repository and service layers
+
+[33mcommit 8391ed504501680627432b7be1a619fc9dfd3cee[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: chetana-sen369 <chetanasen369@gmail.com>
+Date:   Thu Jun 25 16:22:06 2026 +0530
+
+    initial commit
