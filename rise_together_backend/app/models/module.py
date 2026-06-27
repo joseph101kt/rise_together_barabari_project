@@ -79,9 +79,6 @@ class Module(Base):
     user_progress: Mapped[List["UserModule"]] = relationship(
         "UserModule", back_populates="module", cascade="all, delete-orphan"
     )
-    link_progress: Mapped[List["UserModuleLink"]] = relationship(
-        "UserModuleLink", back_populates="module", cascade="all, delete-orphan"
-    )
     stars: Mapped[List["ModuleStar"]] = relationship(
         "ModuleStar", back_populates="module", cascade="all, delete-orphan"
     )

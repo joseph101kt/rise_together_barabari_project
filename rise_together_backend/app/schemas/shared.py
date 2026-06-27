@@ -19,10 +19,12 @@ class LinkResponse(BaseModel):
 
 
 class ModuleLinkResponse(LinkResponse):
-    """Link with its position inside a module."""
+    module_link_id: int
+
     og_title: str | None = None
     og_description: str | None = None
     og_image: str | None = None
+
     order_index: int
 
 

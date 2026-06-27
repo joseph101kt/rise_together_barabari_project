@@ -1,4 +1,4 @@
 
 from .module_repository import ModuleRepository
 from .profile_repository import ProfileRepository
-from .progress_repository import ProgressRepository
+from .user_module_repository import UserModuleRepository

@@ -8,7 +8,6 @@ from app.models.user import User
 from app.schemas.progress import UserSubmissionsResponse
 from app.schemas.shared import SkillResponse
 from app.schemas.users import FullProfileResponse, ProfileUpdateRequest, PublicProfileResponse
-from app.services.progress_services import ProgressService
 from app.services.skill_service import SkillService
 from app.services.user_service import UserService
 
@@ -87,17 +86,4 @@ def remove_skill(
     SkillService(db).remove_skill(current_user.id, skill_id)
 
 
-# ---------------------------------------------------------------------------
-# Submissions
-# ---------------------------------------------------------------------------
 
-@router.get(
-    "/me/submissions",
-    response_model=list[UserSubmissionsResponse],
-    summary="Get all submission links for the current user, grouped by module",
-)
-def get_submissions(
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
-):
-    return ProgressService(db).get_submissions(current_user.id)

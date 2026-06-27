@@ -1,14 +1,20 @@
 """
 ModuleRepository
 
-Touches:
-  - module_card_view  (SQL view created at startup)
-  - modules           (for tree recursion via CTE)
-  - module_links + links
-  - module_skills + skills
-"""
+Two public methods, one internal tree-builder.
 
-from typing import Any
+  get_root_modules()  — returns all root modules as trees
+  get_module(id)      — returns one module as a tree
+
+Tree-building strategy
+----------------------
+1. Collect all node IDs with a simple recursive CTE (no aggregates in the
+   recursive term, which PostgreSQL forbids).
+2. Enrich every ID in one query against module_card_view (counts are
+   already computed there).
+3. Fetch skills and links for all nodes in two bulk queries.
+4. Assemble nesting in Python.
+"""
 
 from sqlalchemy import text
 from sqlalchemy.orm import Session
@@ -19,157 +25,151 @@ class ModuleRepository:
         self.db = db
 
     # ------------------------------------------------------------------
-    # module_card_view  — flat card list
+    # Public API
     # ------------------------------------------------------------------
 
-    def get_card_list(self, parent_id: int | None = None) -> list[dict]:
-        """
-        Returns a list of module cards.
-        Defaults to root-level (parent_id IS NULL).
-        Pass a parent_id to get direct children.
-        """
-        if parent_id is None:
-            rows = self.db.execute(
-                text("""
-                    SELECT *
-                    FROM module_card_view
-                    WHERE parent_id IS NULL
-                    ORDER BY order_index ASC
-                """)
-            ).mappings().all()
-        else:
-            rows = self.db.execute(
-                text("""
-                    SELECT *
-                    FROM module_card_view
-                    WHERE parent_id = :parent_id
-                    ORDER BY order_index ASC
-                """),
-                {"parent_id": parent_id},
-            ).mappings().all()
-
-        return [dict(row) for row in rows]
-
-    # ------------------------------------------------------------------
-    # module_details_view  — card + skills + links + direct children
-    # ------------------------------------------------------------------
-
-    def get_details(self, module_id: int) -> dict | None:
-        """
-        Returns a single module with its skills, links, and direct children.
-        Returns None if not found.
-        """
-        # 1. The module card itself
-        row = self.db.execute(
-            text("SELECT * FROM module_card_view WHERE id = :id"),
-            {"id": module_id},
-        ).mappings().first()
-
-        if not row:
-            return None
-
-        module = dict(row)
-
-        # 2. Skills attached to this module
-        skill_rows = self.db.execute(
+    def get_root_modules(self) -> list[dict]:
+        root_rows = self.db.execute(
             text("""
-                SELECT s.id, s.name, s.slug
-                FROM skills s
-                JOIN module_skills ms ON ms.skill_id = s.id
-                WHERE ms.module_id = :module_id
-                ORDER BY s.name ASC
-            """),
-            {"module_id": module_id},
+                SELECT id
+                FROM modules
+                WHERE parent_id IS NULL
+                ORDER BY order_index ASC
+            """)
         ).mappings().all()
 
-        # 3. Links attached to this module, ordered by order_index
+        results = []
+        for row in root_rows:
+            tree = self._build_tree(row["id"])
+            if tree is not None:
+                results.append(tree)
+        return results
+
+    def get_module(self, module_id: int) -> dict | None:
+        """
+        Returns a single module with its full descendant tree.
+        Returns None if module_id does not exist.
+        """
+        return self._build_tree(module_id)
+    
+    def exists(self, module_id: int) -> bool:
+        """Lightweight check — does this module exist?"""
+        row = self.db.execute(
+            text("SELECT 1 FROM modules WHERE id = :id"),
+            {"id": module_id},
+        ).first()
+        return row is not None
+
+    # ------------------------------------------------------------------
+    # Internal tree builder
+    # ------------------------------------------------------------------
+
+    def _build_tree(self, root_id: int) -> dict | None:
+        # ---- Step 1: collect all node IDs via recursive CTE -----------
+        # No aggregates here — PostgreSQL does not allow GROUP BY /
+        # aggregate functions inside the recursive term of a WITH RECURSIVE.
+        id_rows = self.db.execute(
+            text("""
+                WITH RECURSIVE subtree AS (
+                    SELECT id, parent_id, order_index
+                    FROM modules
+                    WHERE id = :root_id
+
+                    UNION ALL
+
+                    SELECT m.id, m.parent_id, m.order_index
+                    FROM modules m
+                    JOIN subtree s ON m.parent_id = s.id
+                )
+                SELECT id FROM subtree
+            """),
+            {"root_id": root_id},
+        ).mappings().all()
+
+        if not id_rows:
+            return None
+
+        ids = [r["id"] for r in id_rows]
+
+        # ---- Step 2: enrich from module_card_view ---------------------
+        # module_card_view already has resource_count, skill_count,
+        # star_count — no need to recompute them.
+        card_rows = self.db.execute(
+            text("""
+                SELECT *
+                FROM module_card_view
+                WHERE id = ANY(:ids)
+            """),
+            {"ids": ids},
+        ).mappings().all()
+
+        nodes: dict[int, dict] = {}
+        for row in card_rows:
+            node = dict(row)
+            node["direct_skills"] = []
+            node["skills"] = []
+            node["links"] = []
+            node["children"] = []
+            nodes[node["id"]] = node
+
+        # ---- Step 3: bulk-fetch direct skills -------------------------
+        skill_rows = self.db.execute(
+            text("""
+                SELECT ms.module_id, s.id, s.name, s.slug
+                FROM skills s
+                JOIN module_skills ms ON ms.skill_id = s.id
+                WHERE ms.module_id = ANY(:ids)
+                ORDER BY s.name ASC
+            """),
+            {"ids": ids},
+        ).mappings().all()
+
+        for row in skill_rows:
+            mid = row["module_id"]
+            if mid in nodes:
+                nodes[mid]["direct_skills"].append({
+                    "id": row["id"],
+                    "name": row["name"],
+                    "slug": row["slug"],
+                })
+
+        # ---- Step 4: bulk-fetch links ---------------------------------
         link_rows = self.db.execute(
             text("""
-                SELECT l.id, l.title, l.url, l.description, l.link_type,
+                SELECT ml.module_id,
+                       ml.id AS module_link_id,
+                       l.id, l.title, l.url, l.description, l.link_type,
                        l.og_title, l.og_description, l.og_image,
                        ml.order_index
                 FROM links l
                 JOIN module_links ml ON ml.link_id = l.id
-                WHERE ml.module_id = :module_id
-                ORDER BY ml.order_index ASC
+                WHERE ml.module_id = ANY(:ids)
+                ORDER BY ml.module_id ASC, ml.order_index ASC
             """),
-            {"module_id": module_id},
+            {"ids": ids},
         ).mappings().all()
 
-        # 4. Direct children (uses the view so counts are included)
-        children = self.get_card_list(parent_id=module_id)
+        for row in link_rows:
+            mid = row["module_id"]
+            if mid in nodes:
+                nodes[mid]["links"].append({
+                    "module_link_id": row["module_link_id"],
+                    "id":             row["id"],
+                    "title":          row["title"],
+                    "url":            row["url"],
+                    "description":    row["description"],
+                    "link_type":      row["link_type"],
+                    "og_title":       row["og_title"],
+                    "og_description": row["og_description"],
+                    "og_image":       row["og_image"],
+                    "order_index":    row["order_index"],
+                })
 
-        return {
-            "module": module,
-            "skills": [dict(r) for r in skill_rows],
-            "links": [dict(r) for r in link_rows],
-            "children": children,
-        }
+        # ---- Step 5: populate aggregate `skills` ----------------------
+        # skills = all direct_skills from this node AND every descendant.
+        # We do this bottom-up after the tree is assembled (Step 6).
 
-    # ------------------------------------------------------------------
-    # module_tree — recursive CTE, max 4 levels deep
-    # ------------------------------------------------------------------
-
-    def get_tree(self, module_id: int) -> dict | None:
-        """
-        Returns a module and all its descendants as a nested tree.
-        Uses a recursive CTE so it's a single query.
-        Assembles nesting in Python.
-        """
-        rows = self.db.execute(
-            text("""
-                WITH RECURSIVE module_tree AS (
-                    -- anchor: the requested root
-                    SELECT
-                        m.id, m.parent_id, m.module_type, m.title,
-                        m.description, m.estimated_completion_time,
-                        m.created_by, m.order_index, m.created_at, m.updated_at,
-                        COUNT(DISTINCT ml.link_id)     AS resource_count,
-                        COUNT(DISTINCT ms.skill_id)    AS skill_count,
-                        COUNT(DISTINCT mstar.user_id)  AS star_count,
-                        0 AS depth
-                    FROM modules m
-                    LEFT JOIN module_links  ml    ON ml.module_id    = m.id
-                    LEFT JOIN module_skills ms    ON ms.module_id    = m.id
-                    LEFT JOIN module_stars  mstar ON mstar.module_id = m.id
-                    WHERE m.id = :module_id
-                    GROUP BY m.id
-
-                    UNION ALL
-
-                    -- recursive: children of each row already in the CTE
-                    SELECT
-                        m.id, m.parent_id, m.module_type, m.title,
-                        m.description, m.estimated_completion_time,
-                        m.created_by, m.order_index, m.created_at, m.updated_at,
-                        COUNT(DISTINCT ml.link_id)     AS resource_count,
-                        COUNT(DISTINCT ms.skill_id)    AS skill_count,
-                        COUNT(DISTINCT mstar.user_id)  AS star_count,
-                        mt.depth + 1
-                    FROM modules m
-                    JOIN module_tree mt ON m.parent_id = mt.id
-                    LEFT JOIN module_links  ml    ON ml.module_id    = m.id
-                    LEFT JOIN module_skills ms    ON ms.module_id    = m.id
-                    LEFT JOIN module_stars  mstar ON mstar.module_id = m.id
-                    WHERE mt.depth < 4   -- max depth guard
-                    GROUP BY m.id, mt.depth
-                )
-                SELECT * FROM module_tree
-                ORDER BY depth ASC, order_index ASC
-            """),
-            {"module_id": module_id},
-        ).mappings().all()
-
-        if not rows:
-            return None
-
-        # Assemble flat rows into nested tree
-        nodes: dict[int, dict] = {}
-        for row in rows:
-            node = dict(row)
-            node["children"] = []
-            nodes[node["id"]] = node
-
+        # ---- Step 6: assemble nested tree in Python -------------------
         root = None
         for node in nodes.values():
             pid = node.get("parent_id")
@@ -178,4 +178,35 @@ class ModuleRepository:
             else:
                 nodes[pid]["children"].append(node)
 
+        # Sort children by order_index (view returns them flat, not sorted
+        # relative to each other after grouping).
+        for node in nodes.values():
+            node["children"].sort(key=lambda c: c.get("order_index", 0))
+
+        # ---- Step 7: bubble skills up the tree ------------------------
+        if root is not None:
+            self._collect_skills(root)
+
         return root
+
+    # ------------------------------------------------------------------
+    # Helper: bubble descendant skills upward
+    # ------------------------------------------------------------------
+
+    def _collect_skills(self, node: dict) -> list[dict]:
+        """
+        Post-order traversal.
+        node["skills"] = node["direct_skills"] + all descendant skills
+        (deduplicated by skill id).
+        Returns the list so the parent can merge it.
+        """
+        all_skills: dict[int, dict] = {
+            s["id"]: s for s in node["direct_skills"]
+        }
+
+        for child in node["children"]:
+            for skill in self._collect_skills(child):
+                all_skills[skill["id"]] = skill
+
+        node["skills"] = list(all_skills.values())
+        return node["skills"]

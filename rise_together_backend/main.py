@@ -43,6 +43,8 @@ async def lifespan(app: FastAPI):
         except Exception:
             db.rollback()
             raise
+    
+    yield
 
 
 app = FastAPI(

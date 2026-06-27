@@ -8,9 +8,7 @@ from app.schemas.auth import (  # noqa: F401
     TokenResponse,
 )
 from app.schemas.modules import (  # noqa: F401
-    ModuleCardResponse,
-    ModuleDetailsResponse,
-    ModuleTreeResponse,
+    ModuleResponse,
 )
 from app.schemas.progress import (  # noqa: F401
     LinkProgressRequest,

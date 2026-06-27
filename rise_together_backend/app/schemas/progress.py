@@ -72,3 +72,20 @@ class UserSubmissionsResponse(BaseModel):
     """
     module: SubmissionModuleResponse
     submissionLinks: list[SubmissionLinkResponse]
+
+class LinkCreateRequest(BaseModel):
+    url: str
+    title: str
+    link_type: LinkType = LinkType.submission  # default to submission
+
+
+class LinkCreateResponse(BaseModel):
+    id: int
+    title: str
+    url: str
+    link_type: LinkType
+    created_by: int | None = None
+    created_at: datetime
+    updated_at: datetime
+
+    model_config = {"from_attributes": True}

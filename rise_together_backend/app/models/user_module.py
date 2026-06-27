@@ -25,8 +25,8 @@ class UserModule(Base):
     status: Mapped[UserModuleStatus] = mapped_column(
         Enum(UserModuleStatus, name="user_module_status"),
         nullable=False,
-        default=UserModuleStatus.not_started,
-        server_default=UserModuleStatus.not_started.value,
+        default=UserModuleStatus.in_progress,
+        server_default=UserModuleStatus.in_progress.value,
     )
 
     started_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
