@@ -6,36 +6,22 @@ Handles all reads and writes for user_modules and user_module_links.
 Public methods
 --------------
   get_user_modules(user_id)
-      Returns every user_module for the user, each with its submitted links.
-
   get_user_module(user_id, module_id)
-      Returns one user_module with its submitted links, or None.
-
   create_user_module(user_id, module_id)
-      Inserts a user_modules row (status=in_progress).
-      Raises if already exists.
-
   create_user_module_link(user_id, module_id, module_link_id, url, title)
-      Inserts into links (link_type=submission) then user_module_links.
-      After inserting, syncs the parent user_module status.
-      Raises if module_link_id does not belong to module_id.
-      Raises if user already has a submission for that slot.
-
   patch_user_module_link(user_id, module_id, module_link_id, completed)
-      Updates completed / completed_at on an existing user_module_link.
-      After updating, syncs the parent user_module status.
 
-Status-sync logic
------------------
-After any write to user_module_links:
-  - Count all module_link slots for the module.
-  - Count how many the user has with completed=true.
-  - If all slots are covered and completed → status='completed'.
-  - Otherwise → status='in_progress'.
+OG metadata
+-----------
+On every read, submitted links with og_title IS NULL are refreshed in-place.
 """
+
+from datetime import datetime
 
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+
+from app.services.link_services import LinkService
 
 
 class UserModuleRepository:
@@ -67,14 +53,12 @@ class UserModuleRepository:
             return []
 
         module_ids = [r["module_id"] for r in um_rows]
-
         link_rows = self._fetch_submitted_links(user_id, module_ids)
 
-        # Group links by module_id
         links_by_module: dict[int, list[dict]] = {}
         for row in link_rows:
             mid = row["module_id"]
-            links_by_module.setdefault(mid, []).append(dict(row))
+            links_by_module.setdefault(mid, []).append(row)
 
         result = []
         for row in um_rows:
@@ -86,6 +70,8 @@ class UserModuleRepository:
 
     def get_user_module(self, user_id: int, module_id: int) -> dict | None:
         """One user_module with submitted links, or None."""
+        self._sync_module_status(user_id, module_id)
+
         um_row = self.db.execute(
             text("""
                 SELECT
@@ -106,7 +92,7 @@ class UserModuleRepository:
         link_rows = self._fetch_submitted_links(user_id, [module_id])
 
         entry = dict(um_row)
-        entry["submitted_links"] = [dict(r) for r in link_rows]
+        entry["submitted_links"] = link_rows
         return entry
 
     # ------------------------------------------------------------------
@@ -157,20 +143,14 @@ class UserModuleRepository:
     ) -> dict:
         """
         Submit a link for a specific module-link slot.
-
-        Steps:
-        1. Verify module_link_id belongs to module_id.
-        2. Verify user does not already have a submission for this slot.
-        3. Insert into links (link_type=submission).
-        4. Insert into user_module_links.
-        5. Sync user_module status.
-        6. Return the updated user_module.
+        Automatically fetches Open Graph metadata for the submitted URL.
         """
-        # 1. Verify the slot belongs to this module
         slot = self.db.execute(
             text("""
-                SELECT id FROM module_links
-                WHERE id = :module_link_id AND module_id = :module_id
+                SELECT id
+                FROM module_links
+                WHERE id = :module_link_id
+                AND module_id = :module_id
             """),
             {"module_link_id": module_link_id, "module_id": module_id},
         ).first()
@@ -180,11 +160,12 @@ class UserModuleRepository:
                 f"module_link {module_link_id} does not belong to module {module_id}."
             )
 
-        # 2. Verify no existing submission for this slot
         existing = self.db.execute(
             text("""
-                SELECT 1 FROM user_module_links
-                WHERE user_id = :user_id AND module_link_id = :module_link_id
+                SELECT 1
+                FROM user_module_links
+                WHERE user_id = :user_id
+                AND module_link_id = :module_link_id
             """),
             {"user_id": user_id, "module_link_id": module_link_id},
         ).first()
@@ -194,39 +175,50 @@ class UserModuleRepository:
                 f"User {user_id} already has a submission for slot {module_link_id}."
             )
 
-        # 3. Insert into links
+        metadata = LinkService.fetch_metadata(url)
+
         link_row = self.db.execute(
             text("""
-                INSERT INTO links (title, url, link_type, created_by)
+                INSERT INTO links (
+                    title, url, link_type, created_by,
+                    og_title, og_description, og_image, og_fetched_at
+                )
                 VALUES (
-                    :title,
-                    :url,
+                    :title, :url,
                     CAST('submission' AS link_type),
-                    :created_by
+                    :created_by,
+                    :og_title, :og_description, :og_image, :og_fetched_at
                 )
                 RETURNING id
             """),
-            {"title": title, "url": url, "created_by": user_id},
+            {
+                "title":          title,
+                "url":            url,
+                "created_by":     user_id,
+                "og_title":       metadata["og_title"],
+                "og_description": metadata["og_description"],
+                "og_image":       metadata["og_image"],
+                "og_fetched_at":  metadata["fetched_at"],
+            },
         ).mappings().first()
 
         link_id = link_row["id"]
 
-        # 4. Insert into user_module_links
         self.db.execute(
             text("""
-                INSERT INTO user_module_links (user_id, module_link_id, link_id, completed)
+                INSERT INTO user_module_links (
+                    user_id, module_link_id, link_id, completed
+                )
                 VALUES (:user_id, :module_link_id, :link_id, false)
             """),
             {
-                "user_id": user_id,
+                "user_id":        user_id,
                 "module_link_id": module_link_id,
-                "link_id": link_id,
+                "link_id":        link_id,
             },
         )
 
-        # 5. Sync status
         self._sync_module_status(user_id, module_id)
-
         self.db.commit()
 
         return self.get_user_module(user_id, module_id)
@@ -243,7 +235,6 @@ class UserModuleRepository:
         Syncs the parent user_module status afterward.
         Raises ValueError if the row does not exist.
         """
-        # Verify the row exists
         existing = self.db.execute(
             text("""
                 SELECT 1 FROM user_module_links
@@ -266,9 +257,9 @@ class UserModuleRepository:
                 WHERE user_id = :user_id AND module_link_id = :module_link_id
             """),
             {
-                "user_id": user_id,
+                "user_id":        user_id,
                 "module_link_id": module_link_id,
-                "completed": completed,
+                "completed":      completed,
             },
         )
 
@@ -283,77 +274,127 @@ class UserModuleRepository:
 
     def _fetch_submitted_links(
         self, user_id: int, module_ids: list[int]
-    ) -> list:
-        """
-        Bulk-fetch all user_module_link rows for the given modules,
-        joined to module_links (for order_index) and links (for url/title/type).
-        Returns rows ordered by module_id, then slot order_index.
-        """
-        return self.db.execute(
+    ) -> list[dict]:
+        rows = self.db.execute(
             text("""
                 SELECT
                     ml.module_id,
                     uml.module_link_id,
                     ml.order_index,
+                    ml.sub_link_type,
                     uml.link_id,
-                    l.title       AS link_title,
-                    l.url         AS link_url,
+                    l.title          AS link_title,
+                    l.url            AS link_url,
                     l.link_type,
+                    l.og_title,
+                    l.og_description,
+                    l.og_image,
                     uml.completed,
                     uml.completed_at
                 FROM user_module_links uml
-                JOIN module_links ml ON ml.id   = uml.module_link_id
-                JOIN links        l  ON l.id    = uml.link_id
-                WHERE uml.user_id    = :user_id
-                  AND ml.module_id   = ANY(:module_ids)
+                JOIN module_links ml ON ml.id = uml.module_link_id
+                JOIN links        l  ON l.id  = uml.link_id
+                WHERE uml.user_id  = :user_id
+                AND ml.module_id   = ANY(:module_ids)
                 ORDER BY ml.module_id ASC, ml.order_index ASC
             """),
             {"user_id": user_id, "module_ids": module_ids},
         ).mappings().all()
 
+        return [self._maybe_refresh_og(dict(row)) for row in rows]
+
+    def _maybe_refresh_og(self, row: dict) -> dict:
+        """
+        If og_title is missing, fetch OG metadata, persist it, and
+        return the row with updated values.
+        Skips the network call if og_title is already populated.
+        """
+        if row.get("og_title"):
+            return row
+
+        url = row.get("link_url") or row.get("url")
+        if not url:
+            return row
+
+        metadata = LinkService.fetch_metadata(url)
+
+        self.db.execute(
+            text("""
+                UPDATE links
+                SET
+                    og_title       = :og_title,
+                    og_description = :og_description,
+                    og_image       = :og_image,
+                    og_fetched_at  = :og_fetched_at
+                WHERE id = :id
+            """),
+            {
+                "id":             row["link_id"],
+                "og_title":       metadata["og_title"],
+                "og_description": metadata["og_description"],
+                "og_image":       metadata["og_image"],
+                "og_fetched_at":  metadata["fetched_at"],
+            },
+        )
+        self.db.flush()
+
+        row["og_title"]       = metadata["og_title"]
+        row["og_description"] = metadata["og_description"]
+        row["og_image"]       = metadata["og_image"]
+
+        return row
+
     def _sync_module_status(self, user_id: int, module_id: int) -> None:
         """
-        Recompute and write user_module.status based on link completion.
+        Synchronize the user's module status.
 
-        Logic:
-          - total  = number of module_link slots for this module
-          - done   = number the user has submitted AND marked completed
-          - If total > 0 and done >= total → 'completed'
-          - Otherwise                      → 'in_progress'
-
-        Called inside an open transaction; caller is responsible for commit.
+        A module is completed when the user has submitted a link for every
+        module_link slot whose underlying link_type is 'submission'.
+        The completed flag on user_module_links is not used for this check.
         """
         counts = self.db.execute(
             text("""
                 SELECT
-                    COUNT(ml.id)                                           AS total,
-                    COUNT(uml.module_link_id)
-                        FILTER (WHERE uml.completed = true)                AS done
+                    COUNT(ml.id)              AS total_required,
+                    COUNT(uml.module_link_id) AS submitted
                 FROM module_links ml
+                JOIN links l
+                    ON l.id = ml.link_id
                 LEFT JOIN user_module_links uml
-                       ON uml.module_link_id = ml.id
-                      AND uml.user_id        = :user_id
-                WHERE ml.module_id = :module_id
+                    ON uml.module_link_id = ml.id
+                    AND uml.user_id = :user_id
+                WHERE
+                    ml.module_id = :module_id
+                    AND l.link_type = CAST('submission' AS link_type)
             """),
             {"user_id": user_id, "module_id": module_id},
         ).mappings().first()
 
+        total_required = counts["total_required"]
+        submitted      = counts["submitted"]
+
         new_status = (
             "completed"
-            if counts["total"] > 0 and counts["done"] >= counts["total"]
+            if total_required > 0 and submitted == total_required
             else "in_progress"
         )
+
+        completed_at = datetime.utcnow() if new_status == "completed" else None
 
         self.db.execute(
             text("""
                 UPDATE user_modules
                 SET
                     status       = CAST(:status AS user_module_status),
-                    completed_at = CASE
-                                     WHEN :status = 'completed' THEN now()
-                                     ELSE NULL
-                                   END
-                WHERE user_id = :user_id AND module_id = :module_id
+                    completed_at = :completed_at
+                WHERE
+                    user_id    = :user_id
+                    AND module_id = :module_id
             """),
-            {"user_id": user_id, "module_id": module_id, "status": new_status},
+            {
+                "status":       new_status,
+                "completed_at": completed_at,
+                "user_id":      user_id,
+                "module_id":    module_id,
+            },
         )

@@ -8,7 +8,6 @@ from app.core.database import Base
 from app.models.enums import LinkType
 
 if TYPE_CHECKING:
-    from app.models.link_review import LinkReview
     from app.models.module_link import ModuleLink
     from app.models.user import User
     from app.models.user_module_link import UserModuleLink
@@ -54,9 +53,6 @@ class Link(Base):
     )
     user_module_links: Mapped[List["UserModuleLink"]] = relationship(
         "UserModuleLink", back_populates="link", cascade="all, delete-orphan"
-    )
-    reviews: Mapped[List["LinkReview"]] = relationship(
-        "LinkReview", back_populates="link", cascade="all, delete-orphan"
     )
 
     __table_args__ = (

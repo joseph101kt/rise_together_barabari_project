@@ -1,9 +1,10 @@
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Optional
 
-from sqlalchemy import BigInteger, ForeignKey, Index, Integer, UniqueConstraint
+from sqlalchemy import BigInteger, Enum, ForeignKey, Index, Integer, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
+from app.models.enums import SubLinkType
 
 if TYPE_CHECKING:
     from app.models.link import Link
@@ -14,7 +15,6 @@ if TYPE_CHECKING:
 class ModuleLink(Base):
     __tablename__ = "module_links"
 
-    # Surrogate PK — lets user_module_links reference a single column
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
 
     module_id: Mapped[int] = mapped_column(
@@ -28,6 +28,13 @@ class ModuleLink(Base):
         Integer, nullable=False, default=0, server_default="0"
     )
 
+    # Only meaningful when the slot's link_type == 'submission'.
+    # Constrains what kind of URL the user must submit.
+    # NULL means any URL is acceptable.
+    sub_link_type: Mapped[Optional[SubLinkType]] = mapped_column(
+        Enum(SubLinkType, name="sub_link_type"), nullable=True
+    )
+
     # Relationships
     module: Mapped["Module"] = relationship("Module", back_populates="module_links")
     link: Mapped["Link"] = relationship("Link", back_populates="module_links")
@@ -38,8 +45,6 @@ class ModuleLink(Base):
     __table_args__ = (
         Index("ix_module_links_module_id", "module_id"),
         Index("ix_module_links_link_id", "link_id"),
-        # A link can only appear once per module
         UniqueConstraint("module_id", "link_id", name="uq_module_links_module_link"),
-        # Order must be unique within a module
         UniqueConstraint("module_id", "order_index", name="uq_module_links_order"),
     )

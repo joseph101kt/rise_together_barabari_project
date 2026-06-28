@@ -31,11 +31,11 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
 
 
 @router.get(
-    "/me",
+    "/self",
     response_model=UserResponse,
     summary="Return the authenticated user's basic info",
 )
-def me(current_user: User = Depends(get_current_user)):
+def self(current_user: User = Depends(get_current_user)):
     # current_user is already a User ORM object — return it directly.
     # UserResponse has from_attributes=True so Pydantic reads it off the model.
     return current_user

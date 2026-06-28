@@ -18,6 +18,8 @@ from app.models.user_profile_link import UserProfileLink
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
+from app.services.link_services import LinkService
+
 
 class ProfileRepository:
     def __init__(self, db: Session):
@@ -100,7 +102,7 @@ class ProfileRepository:
         # 5. Profile links (GitHub, portfolio, etc.)
         link_rows = self.db.execute(
             text("""
-                SELECT l.id, l.title, l.url, l.link_type, l.description
+                SELECT l.id, l.title, l.url, l.link_type, l.description, l.og_title, l.og_description, l.og_image
                 FROM links l
                 JOIN user_profile_links upl ON upl.link_id = l.id
                 WHERE upl.user_id = :user_id
@@ -159,31 +161,56 @@ class ProfileRepository:
     def upsert_profile_links(self, user_id: int, links: list[dict]) -> None:
         """
         Full replace for profile links.
-        Each dict: { title, url, link_type, description? }
-        Creates new Link rows and UserProfileLink join rows.
-        Old join rows and their orphaned links are deleted first.
+
+        Existing links are deleted.
+        New links automatically fetch Open Graph metadata.
         """
+
         # Delete old join rows and the link rows they pointed to
         old_joins = (
             self.db.query(UserProfileLink)
             .filter(UserProfileLink.user_id == user_id)
             .all()
         )
-        old_link_ids = [j.link_id for j in old_joins]
-        self.db.query(UserProfileLink).filter(UserProfileLink.user_id == user_id).delete()
-        if old_link_ids:
-            self.db.query(Link).filter(Link.id.in_(old_link_ids)).delete()
 
-        # Insert new links and join rows
+        old_link_ids = [join.link_id for join in old_joins]
+
+        self.db.query(UserProfileLink).filter(
+            UserProfileLink.user_id == user_id
+        ).delete()
+
+        if old_link_ids:
+            self.db.query(Link).filter(
+                Link.id.in_(old_link_ids)
+            ).delete(synchronize_session=False)
+
+        # Create new links
         for link_data in links:
+            metadata = LinkService.fetch_metadata(link_data["url"])
+            print(metadata)
+
             link = Link(
                 title=link_data["title"],
                 url=link_data["url"],
-                link_type=LinkType(link_data["link_type"]),
                 description=link_data.get("description"),
+                link_type=LinkType(link_data["link_type"]),
                 created_by=user_id,
+
+                og_title=metadata["og_title"],
+                og_description=metadata["og_description"],
+                og_image=metadata["og_image"],
+                og_fetched_at=metadata["fetched_at"],
             )
+
             self.db.add(link)
             self.db.flush()
-            self.db.add(UserProfileLink(user_id=user_id, link_id=link.id))
+
+            self.db.add(
+                UserProfileLink(
+                    user_id=user_id,
+                    link_id=link.id,
+                )
+            )
+
         self.db.flush()
+

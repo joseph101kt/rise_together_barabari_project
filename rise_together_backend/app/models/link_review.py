@@ -42,9 +42,6 @@ class LinkReview(Base):
         DateTime, nullable=False, server_default=func.now(), onupdate=func.now()
     )
 
-    # Relationships
-    link: Mapped["Link"] = relationship("Link", back_populates="reviews")
-    reviewer: Mapped["User"] = relationship("User")
 
     __table_args__ = (
         Index("ix_link_reviews_link_id", "link_id"),

@@ -3,8 +3,8 @@ Shared schemas used across more than one domain.
 Import from here to avoid circular imports.
 """
 
-from app.models.enums import LinkType
-from pydantic import BaseModel, HttpUrl
+from app.models.enums import LinkType, SubLinkType
+from pydantic import BaseModel
 
 
 class LinkResponse(BaseModel):
@@ -14,18 +14,31 @@ class LinkResponse(BaseModel):
     url: str
     description: str | None = None
     link_type: LinkType
-
-    model_config = {"from_attributes": True}
-
-
-class ModuleLinkResponse(LinkResponse):
-    module_link_id: int
-
     og_title: str | None = None
     og_description: str | None = None
     og_image: str | None = None
 
+    model_config = {"from_attributes": True}
+
+
+class ModuleLinkResponse(BaseModel):
+    """
+    A module's link slot as returned inside ModuleResponse.
+    Not inheriting LinkResponse to keep the field order clean.
+    """
+    module_link_id: int
+    id: int
+    title: str
+    url: str
+    description: str | None = None
+    link_type: LinkType
+    sub_link_type: SubLinkType | None = None  # only set when link_type == submission
+    og_title: str | None = None
+    og_description: str | None = None
+    og_image: str | None = None
     order_index: int
+
+    model_config = {"from_attributes": True}
 
 
 class ProfileLinkResponse(LinkResponse):

@@ -1,0 +1,182 @@
+{
+  "skills": [
+    { "name": "Python",          "slug": "python" },
+    { "name": "FastAPI",         "slug": "fastapi" },
+    { "name": "SQL",             "slug": "sql" },
+    { "name": "Git",             "slug": "git" },
+    { "name": "HTML & CSS",      "slug": "html-css" },
+    { "name": "JavaScript",      "slug": "javascript" },
+    { "name": "Problem Solving", "slug": "problem-solving" },
+    { "name": "Communication",   "slug": "communication" },
+    { "name": "Resume Writing",  "slug": "resume-writing" },
+    { "name": "LinkedIn",        "slug": "linkedin" }
+  ],
+
+  "users": [
+    {
+      "email": "admin@risetogether.in",
+      "name": "Rise Together Admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "email": "priya@example.com",
+      "name": "Priya Sharma",
+      "password": "password123",
+      "role": "learner",
+      "profile": {
+        "headline": "CS student at Govt Engineering College, Nagpur",
+        "bio": "First-gen tech student trying to break into the industry."
+      },
+      "education": [
+        {
+          "institution": "Government Engineering College, Nagpur",
+          "degree": "B.E.",
+          "field_of_study": "Computer Science"
+        }
+      ],
+      "skills": ["python", "html-css", "git"],
+      "profile_links": [
+        {
+          "title": "Priya's GitHub",
+          "url": "https://github.com",
+          "link_type": "github"
+        }
+      ]
+    }
+  ],
+
+  "modules": [
+    {
+      "title": "Getting Job-Ready",
+      "module_type": "path",
+      "description": "Everything you need to land your first tech job.",
+      "estimated_completion_time": "8 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 0,
+      "children": [
+        {
+          "title": "Build Your Online Presence",
+          "module_type": "module",
+          "description": "Set up your GitHub and LinkedIn so recruiters can find you.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": ["git", "linkedin"],
+          "links": [
+            {
+              "title": "How to Write a Great GitHub README",
+              "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Optimise Your LinkedIn Profile",
+              "url": "https://www.linkedin.com/help/linkedin/answer/a554351",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your GitHub profile link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Python Fundamentals",
+          "module_type": "module",
+          "description": "Core Python you actually need for backend work.",
+          "estimated_completion_time": "2 weeks",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": ["python", "problem-solving"],
+          "links": [
+            {
+              "title": "Python Official Tutorial",
+              "url": "https://docs.python.org/3/tutorial/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Python Exercises — w3resource",
+              "url": "https://www.w3resource.com/python-exercises/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your Python project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "SQL Basics",
+          "module_type": "module",
+          "description": "Write real queries, understand joins, and stop being afraid of databases.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": ["sql", "problem-solving"],
+          "links": [
+            {
+              "title": "SQLBolt — Interactive SQL Tutorial",
+              "url": "https://sqlbolt.com",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "PostgreSQL Tutorial",
+              "url": "https://www.postgresqltutorial.com",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your SQL demo project",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Build a Portfolio Project",
+          "module_type": "project",
+          "description": "Ship something real. Build a small full-stack or scripting project and document it properly.",
+          "estimated_completion_time": "2 weeks",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": ["python", "git"],
+          "links": [
+            {
+              "title": "How to Document Your Projects for Recruiters",
+              "url": "https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit your project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a 2-minute demo video",
+              "url": "https://youtube.com",
+              "link_type": "submission",
+              "sub_link_type": "youtube",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

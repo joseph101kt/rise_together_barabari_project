@@ -14,10 +14,17 @@ Tree-building strategy
    already computed there).
 3. Fetch skills and links for all nodes in two bulk queries.
 4. Assemble nesting in Python.
+
+OG metadata
+-----------
+On every read, any link row with og_title IS NULL is refreshed in-place:
+the links table is updated and the fresh values are used in the response.
 """
 
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+
+from app.services.link_services import LinkService
 
 
 class ModuleRepository:
@@ -51,7 +58,7 @@ class ModuleRepository:
         Returns None if module_id does not exist.
         """
         return self._build_tree(module_id)
-    
+
     def exists(self, module_id: int) -> bool:
         """Lightweight check — does this module exist?"""
         row = self.db.execute(
@@ -66,8 +73,6 @@ class ModuleRepository:
 
     def _build_tree(self, root_id: int) -> dict | None:
         # ---- Step 1: collect all node IDs via recursive CTE -----------
-        # No aggregates here — PostgreSQL does not allow GROUP BY /
-        # aggregate functions inside the recursive term of a WITH RECURSIVE.
         id_rows = self.db.execute(
             text("""
                 WITH RECURSIVE subtree AS (
@@ -92,8 +97,6 @@ class ModuleRepository:
         ids = [r["id"] for r in id_rows]
 
         # ---- Step 2: enrich from module_card_view ---------------------
-        # module_card_view already has resource_count, skill_count,
-        # star_count — no need to recompute them.
         card_rows = self.db.execute(
             text("""
                 SELECT *
@@ -106,13 +109,12 @@ class ModuleRepository:
         nodes: dict[int, dict] = {}
         for row in card_rows:
             node = dict(row)
-            node["direct_skills"] = []
             node["skills"] = []
             node["links"] = []
             node["children"] = []
             nodes[node["id"]] = node
 
-        # ---- Step 3: bulk-fetch direct skills -------------------------
+        # ---- Step 3: bulk-fetch skills --------------------------------
         skill_rows = self.db.execute(
             text("""
                 SELECT ms.module_id, s.id, s.name, s.slug
@@ -127,7 +129,7 @@ class ModuleRepository:
         for row in skill_rows:
             mid = row["module_id"]
             if mid in nodes:
-                nodes[mid]["direct_skills"].append({
+                nodes[mid]["skills"].append({
                     "id": row["id"],
                     "name": row["name"],
                     "slug": row["slug"],
@@ -139,6 +141,7 @@ class ModuleRepository:
                 SELECT ml.module_id,
                        ml.id AS module_link_id,
                        l.id, l.title, l.url, l.description, l.link_type,
+                       ml.sub_link_type,
                        l.og_title, l.og_description, l.og_image,
                        ml.order_index
                 FROM links l
@@ -149,7 +152,10 @@ class ModuleRepository:
             {"ids": ids},
         ).mappings().all()
 
-        for row in link_rows:
+        # ---- Step 4a: backfill missing OG metadata --------------------
+        enriched_links = [self._maybe_refresh_og(dict(row)) for row in link_rows]
+
+        for row in enriched_links:
             mid = row["module_id"]
             if mid in nodes:
                 nodes[mid]["links"].append({
@@ -159,17 +165,14 @@ class ModuleRepository:
                     "url":            row["url"],
                     "description":    row["description"],
                     "link_type":      row["link_type"],
+                    "sub_link_type":  row["sub_link_type"],
                     "og_title":       row["og_title"],
                     "og_description": row["og_description"],
                     "og_image":       row["og_image"],
                     "order_index":    row["order_index"],
                 })
 
-        # ---- Step 5: populate aggregate `skills` ----------------------
-        # skills = all direct_skills from this node AND every descendant.
-        # We do this bottom-up after the tree is assembled (Step 6).
-
-        # ---- Step 6: assemble nested tree in Python -------------------
+        # ---- Step 5: assemble nested tree in Python -------------------
         root = None
         for node in nodes.values():
             pid = node.get("parent_id")
@@ -178,35 +181,48 @@ class ModuleRepository:
             else:
                 nodes[pid]["children"].append(node)
 
-        # Sort children by order_index (view returns them flat, not sorted
-        # relative to each other after grouping).
         for node in nodes.values():
             node["children"].sort(key=lambda c: c.get("order_index", 0))
-
-        # ---- Step 7: bubble skills up the tree ------------------------
-        if root is not None:
-            self._collect_skills(root)
 
         return root
 
     # ------------------------------------------------------------------
-    # Helper: bubble descendant skills upward
+    # OG helpers
     # ------------------------------------------------------------------
 
-    def _collect_skills(self, node: dict) -> list[dict]:
+    def _maybe_refresh_og(self, row: dict) -> dict:
         """
-        Post-order traversal.
-        node["skills"] = node["direct_skills"] + all descendant skills
-        (deduplicated by skill id).
-        Returns the list so the parent can merge it.
+        If og_title is missing, fetch OG metadata, persist it to the
+        links table, and return the row with updated values.
+        Skips the network call if og_title is already populated.
         """
-        all_skills: dict[int, dict] = {
-            s["id"]: s for s in node["direct_skills"]
-        }
+        if row.get("og_title"):
+            return row
 
-        for child in node["children"]:
-            for skill in self._collect_skills(child):
-                all_skills[skill["id"]] = skill
+        metadata = LinkService.fetch_metadata(row["url"])
 
-        node["skills"] = list(all_skills.values())
-        return node["skills"]
+        self.db.execute(
+            text("""
+                UPDATE links
+                SET
+                    og_title       = :og_title,
+                    og_description = :og_description,
+                    og_image       = :og_image,
+                    og_fetched_at  = :og_fetched_at
+                WHERE id = :id
+            """),
+            {
+                "id":             row["id"],
+                "og_title":       metadata["og_title"],
+                "og_description": metadata["og_description"],
+                "og_image":       metadata["og_image"],
+                "og_fetched_at":  metadata["fetched_at"],
+            },
+        )
+        self.db.flush()
+
+        row["og_title"]       = metadata["og_title"]
+        row["og_description"] = metadata["og_description"]
+        row["og_image"]       = metadata["og_image"]
+
+        return row

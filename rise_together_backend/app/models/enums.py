@@ -33,3 +33,15 @@ class LinkType(str, enum.Enum):
 class LinkReviewStatus(str, enum.Enum):
     pending = "pending"
     reviewed = "reviewed"
+
+class SubLinkType(str, enum.Enum):
+    """
+    Optional constraint on a submission slot.
+    Only relevant when LinkType == submission.
+    None means any URL is acceptable.
+    """
+    github = "github"
+    youtube = "youtube"
+    google_drive = "google_drive"
+    figma = "figma"
+    other = "other"
