@@ -1,5 +1,217 @@
 {
   "skills": [
+    {
+      "name": "Leadership",
+      "slug": "leadership"
+    },
+    {
+      "name": "Delegation",
+      "slug": "delegation"
+    },
+    {
+      "name": "Mentoring",
+      "slug": "mentoring"
+    },
+    {
+      "name": "Emotional Intelligence",
+      "slug": "emotional-intelligence"
+    },
+    {
+      "name": "Stress Management",
+      "slug": "stress-management"
+    },
+    {
+      "name": "Conflict Resolution",
+      "slug": "conflict-resolution"
+    },
+    {
+      "name": "Resilience",
+      "slug": "resilience"
+    },
+    {
+      "name": "Financial Literacy",
+      "slug": "financial-literacy"
+    },
+    {
+      "name": "Budgeting",
+      "slug": "budgeting"
+    },
+    {
+      "name": "Negotiation",
+      "slug": "negotiation"
+    },
+    {
+      "name": "Salary Negotiation",
+      "slug": "salary-negotiation"
+    },
+    {
+      "name": "Investing Basics",
+      "slug": "investing-basics"
+    },
+    {
+      "name": "Entrepreneurship",
+      "slug": "entrepreneurship"
+    },
+    {
+      "name": "Product Thinking",
+      "slug": "product-thinking"
+    },
+    {
+      "name": "Business Models",
+      "slug": "business-models"
+    },
+    {
+      "name": "Design Thinking",
+      "slug": "design-thinking"
+    },
+    {
+      "name": "UI/UX Design",
+      "slug": "ui-ux-design"
+    },
+    {
+      "name": "Wireframing & Prototyping",
+      "slug": "wireframing-prototyping"
+    },
+    {
+      "name": "Figma",
+      "slug": "figma"
+    },
+    {
+      "name": "Usability Testing",
+      "slug": "usability-testing"
+    },
+    {
+      "name": "Software Testing",
+      "slug": "software-testing"
+    },
+    {
+      "name": "Unit Testing",
+      "slug": "unit-testing"
+    },
+    {
+      "name": "Test-Driven Development",
+      "slug": "test-driven-development"
+    },
+    {
+      "name": "Cybersecurity",
+      "slug": "cybersecurity"
+    },
+    {
+      "name": "Web Security",
+      "slug": "web-security"
+    },
+    {
+      "name": "Secure Coding",
+      "slug": "secure-coding"
+    },
+    {
+      "name": "Authentication & Authorization",
+      "slug": "auth-fundamentals"
+    },
+    {
+      "name": "Career Growth",
+      "slug": "career-growth"
+    },
+    {
+      "name": "Self-Advocacy",
+      "slug": "self-advocacy"
+    },
+    {
+      "name": "Growth Mindset",
+      "slug": "growth-mindset"
+    },
+    {
+      "name": "Habit Building",
+      "slug": "habit-building"
+    },
+    {
+      "name": "Workplace Wellbeing",
+      "slug": "workplace-wellbeing"
+    },
+    {
+      "name": "React Native",
+      "slug": "react-native"
+    },
+    {
+      "name": "Expo",
+      "slug": "expo"
+    },
+    {
+      "name": "Mobile Development",
+      "slug": "mobile-development"
+    },
+    {
+      "name": "Docker",
+      "slug": "docker"
+    },
+    {
+      "name": "CI/CD",
+      "slug": "ci-cd"
+    },
+    {
+      "name": "Cloud Deployment",
+      "slug": "cloud-deployment"
+    },
+    {
+      "name": "AWS",
+      "slug": "aws"
+    },
+    {
+      "name": "Monitoring & Logging",
+      "slug": "monitoring-logging"
+    },
+    {
+      "name": "System Design",
+      "slug": "system-design"
+    },
+    {
+      "name": "Caching",
+      "slug": "caching"
+    },
+    {
+      "name": "Load Balancing",
+      "slug": "load-balancing"
+    },
+    {
+      "name": "Open Source",
+      "slug": "open-source"
+    },
+    {
+      "name": "Pandas",
+      "slug": "pandas"
+    },
+    {
+      "name": "NumPy",
+      "slug": "numpy"
+    },
+    {
+      "name": "Data Visualization",
+      "slug": "data-visualization"
+    },
+    {
+      "name": "Machine Learning",
+      "slug": "machine-learning"
+    },
+    {
+      "name": "Data Science",
+      "slug": "data-science"
+    },
+    {
+      "name": "Portfolio Building",
+      "slug": "portfolio-building"
+    },
+    {
+      "name": "Freelancing",
+      "slug": "freelancing"
+    },
+    {
+      "name": "Personal Branding",
+      "slug": "personal-branding"
+    },
+    {
+      "name": "Content Creation",
+      "slug": "content-creation"
+    },
     { "name": "Python",                "slug": "python" },
     { "name": "FastAPI",               "slug": "fastapi" },
     { "name": "SQL",                   "slug": "sql" },
@@ -36,6 +248,1976 @@
   ],
 
   "modules": [
+    {
+      "title": "Leadership & People Management",
+      "module_type": "path",
+      "description": "Learn to lead a team, delegate well, and help other people do their best work — even if you're not a manager yet.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 10,
+      "children": [
+        {
+          "title": "Leadership Fundamentals",
+          "module_type": "lesson",
+          "description": "What leadership actually means day to day, and why it's a skill you can build early, not just a title.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "leadership"
+          ],
+          "links": [
+            {
+              "title": "What Makes a Leader — HBR Classic",
+              "url": "https://hbr.org/2004/01/what-makes-a-leader",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Leadership vs Management — Explained",
+              "url": "https://www.mindtools.com/aorqe4z/leadership-vs-management",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your leadership self-reflection",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, describe one moment (in college, a project, a family situation, anywhere) where you naturally stepped up to lead — even informally. Write 300-400 words on what you did, what worked, and what you'd do differently now. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Delegation & Accountability",
+          "module_type": "module",
+          "description": "Learn to hand off work effectively without micromanaging or dropping the ball.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "delegation",
+            "leadership"
+          ],
+          "links": [
+            {
+              "title": "The Art of Delegation — Asana",
+              "url": "https://asana.com/resources/effective-delegation",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Hold People Accountable Without Being a Jerk",
+              "url": "https://www.radicalcandor.com/blog/how-to-hold-people-accountable/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a delegation plan",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Pick a real or hypothetical group project with 3-4 people. In a Google Doc, break the work into clear tasks, assign each to a person based on their strengths, define what 'done' looks like for each task, and describe how you'd check in without micromanaging. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Giving and Receiving Feedback",
+          "module_type": "module",
+          "description": "Say hard things kindly, and take feedback without getting defensive.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "leadership",
+            "communication"
+          ],
+          "links": [
+            {
+              "title": "Radical Candor — Core Framework",
+              "url": "https://www.radicalcandor.com/the-radical-candor-framework/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "SBI Feedback Model — Center for Creative Leadership",
+              "url": "https://www.ccl.org/articles/leading-effectively-articles/closing-the-gap-between-intent-vs-impact-sbii/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit written feedback examples",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Using the Situation-Behavior-Impact model, write 2 pieces of feedback in a Google Doc: one piece of constructive feedback you'd genuinely give a teammate, and one piece of positive feedback. For each, also write how you'd want to receive similar feedback yourself. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Leading a Team Project",
+          "module_type": "project",
+          "description": "Apply everything by actually leading a small project from start to finish.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "leadership",
+            "delegation",
+            "communication"
+          ],
+          "links": [
+            {
+              "title": "Submit your project retrospective",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Lead a real small group task — a college assignment, a hackathon team, a club event, or a study group. Afterward, write a retrospective in a Google Doc: what the goal was, how you split up work, one thing you'd repeat as a leader, and one thing you'd change. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Emotional Intelligence & Resilience",
+      "module_type": "path",
+      "description": "Understand and manage your own emotions, handle conflict well, and bounce back from setbacks.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 11,
+      "children": [
+        {
+          "title": "Understanding Emotional Intelligence",
+          "module_type": "lesson",
+          "description": "The four core skills of EQ: self-awareness, self-management, social awareness, and relationship management.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "emotional-intelligence"
+          ],
+          "links": [
+            {
+              "title": "What is Emotional Intelligence? — Harvard Business Publishing",
+              "url": "https://www.harvardbusiness.org/what-is-emotional-intelligence/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Emotional Intelligence in Leadership — Daniel Goleman Summary",
+              "url": "https://www.danielgoleman.info/topics/emotional-intelligence/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your self-awareness reflection",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, write 300-400 words identifying: a situation that reliably triggers a strong emotional reaction in you, what you usually do in that moment, and one alternative response you could try next time. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Managing Stress in Demanding Environments",
+          "module_type": "module",
+          "description": "Practical, sustainable ways to stay steady under deadlines, exams, or high-pressure work.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "stress-management",
+            "workplace-wellbeing"
+          ],
+          "links": [
+            {
+              "title": "Stress Management Techniques — American Psychological Association",
+              "url": "https://www.apa.org/topics/stress/manage-social-support",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Preventing Burnout Before It Starts — HBR",
+              "url": "https://hbr.org/2016/11/beating-burnout",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your personal stress-management toolkit",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, list 5 specific, realistic things you can do when you notice you're stressed or overwhelmed (e.g. short walk, calling a friend, breaking a task down, stepping away for 10 minutes). Also note early warning signs that tell you stress is building. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Conflict Resolution",
+          "module_type": "module",
+          "description": "Disagree productively instead of avoiding conflict or letting it become personal.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "conflict-resolution",
+            "communication"
+          ],
+          "links": [
+            {
+              "title": "The Thomas-Kilmann Conflict Model Explained",
+              "url": "https://kilmanndiagnostics.com/overview-thomas-kilmann-conflict-mode-instrument-tki/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Manage Conflict at Work — HBR",
+              "url": "https://hbr.org/2015/09/how-to-handle-a-disagreement-on-your-team",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a conflict resolution case study",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Describe a real disagreement you were part of (group project, family, friends) in a Google Doc. Write: what each side wanted, what was actually driving the disagreement underneath, how it was resolved (or wasn't), and what a better resolution could have looked like. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Building Resilience",
+          "module_type": "lesson",
+          "description": "Recover from setbacks — a rejected application, a failed project, harsh feedback — without spiraling.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "resilience",
+            "growth-mindset"
+          ],
+          "links": [
+            {
+              "title": "What is Resilience? — American Psychological Association",
+              "url": "https://www.apa.org/topics/resilience",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Carol Dweck on Growth Mindset — Stanford",
+              "url": "https://news.stanford.edu/2012/09/20/dweck-mindset-achievement-092012/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your setback reflection",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Write about a real setback you've faced (a rejection, a failed exam, a project that didn't work) in a Google Doc — 300-400 words. Cover what happened, how you responded at the time, and what you'd tell a friend going through the same thing today. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Financial Literacy & Money Management",
+      "module_type": "path",
+      "description": "The practical money skills that college rarely teaches — budgeting, salary basics, and how investing actually works.",
+      "estimated_completion_time": "2 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 12,
+      "children": [
+        {
+          "title": "Personal Budgeting Basics",
+          "module_type": "module",
+          "description": "Track where your money actually goes and build a simple, realistic budget.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "financial-literacy",
+            "budgeting"
+          ],
+          "links": [
+            {
+              "title": "How to Make a Budget — NerdWallet",
+              "url": "https://www.nerdwallet.com/article/finance/how-to-budget",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "The 50/30/20 Rule Explained",
+              "url": "https://www.investopedia.com/ask/answers/022916/what-502030-budget-rule.asp",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your monthly budget sheet",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Create a Google Sheet tracking your actual income and expenses for one month (or a realistic projected month if you don't have income yet). Categorize spending, and note one category you'd want to adjust going forward. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Understanding Salary, Taxes & Offers",
+          "module_type": "module",
+          "description": "Read a job offer like someone who knows what they're looking at.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "financial-literacy",
+            "salary-negotiation"
+          ],
+          "links": [
+            {
+              "title": "How to Read a Job Offer Letter",
+              "url": "https://www.indeed.com/career-advice/pay-salary/how-to-read-an-offer-letter",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Understanding CTC vs In-Hand Salary (India)",
+              "url": "https://cleartax.in/s/ctc-full-form",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your offer breakdown",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Find a real sample tech job offer letter or CTC breakdown online (search 'sample CTC breakdown India tech job'). In a Google Doc, explain in your own words what each component means (base salary, bonus, benefits, deductions) and what the realistic monthly in-hand amount would be. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Saving & Investing Fundamentals",
+          "module_type": "lesson",
+          "description": "The basic concepts behind saving consistently and letting money grow over time.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "investing-basics",
+            "financial-literacy"
+          ],
+          "links": [
+            {
+              "title": "Investing Basics — Zerodha Varsity",
+              "url": "https://zerodha.com/varsity/module/introduction-to-stock-markets/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "The Power of Compound Interest — Investopedia",
+              "url": "https://www.investopedia.com/terms/c/compoundinterest.asp",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your investing basics summary",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, explain in your own words (250-350 words): the difference between saving and investing, what compound interest means with a simple example, and 3 common beginner investment options in India (e.g. fixed deposits, mutual funds, index funds) with one pro and one con for each. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Negotiation Skills",
+      "module_type": "path",
+      "description": "Learn to negotiate confidently — for a salary, a freelance rate, or anything else.",
+      "estimated_completion_time": "1 week",
+      "created_by": "admin@risetogether.in",
+      "order_index": 13,
+      "children": [
+        {
+          "title": "Negotiation Fundamentals",
+          "module_type": "lesson",
+          "description": "The core principles behind any good negotiation — interests vs positions, BATNA, and anchoring.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "negotiation"
+          ],
+          "links": [
+            {
+              "title": "Getting to Yes — Key Concepts Summary",
+              "url": "https://www.pon.harvard.edu/daily/negotiation-skills-daily/getting-to-yes-negotiation-skills/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "What is BATNA? — Harvard PON",
+              "url": "https://www.pon.harvard.edu/daily/batna/what-is-batna/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your negotiation concepts summary",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, explain in your own words (250-350 words) what BATNA means, the difference between interests and positions, and one real or hypothetical negotiation situation where knowing your BATNA would have changed your approach. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Salary & Freelance Rate Negotiation Practice",
+          "module_type": "assignment",
+          "description": "Practice the actual conversation before you need to have it for real.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "salary-negotiation",
+            "negotiation",
+            "communication"
+          ],
+          "links": [
+            {
+              "title": "How to Negotiate Your Salary — Ramit Sethi (freeCodeCamp summary)",
+              "url": "https://www.freecodecamp.org/news/how-to-negotiate-your-salary-as-a-developer/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a recorded salary negotiation role-play",
+              "url": "https://youtube.com",
+              "link_type": "submission",
+              "sub_link_type": "youtube",
+              "description": "With a friend playing the recruiter, record a 3-5 minute role-play where you're given a lower-than-expected offer and need to negotiate. Practice stating your case calmly with a specific number and reasoning, not just asking for 'more'. Upload to YouTube as unlisted and paste the URL here.",
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Entrepreneurship & Product Thinking",
+      "module_type": "path",
+      "description": "Think like a founder — validate ideas, build MVPs, and pitch clearly, even if you plan to stay an employee.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 14,
+      "children": [
+        {
+          "title": "Idea Validation & Customer Discovery",
+          "module_type": "module",
+          "description": "Learn to test whether an idea is worth building before you write a single line of code.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "entrepreneurship",
+            "product-thinking"
+          ],
+          "links": [
+            {
+              "title": "The Mom Test — Key Ideas Summary",
+              "url": "http://momtestbook.com",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Talk to Users — Y Combinator",
+              "url": "https://www.ycombinator.com/library/6f-how-to-talk-to-users",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your customer discovery notes",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Pick a real problem you think is worth solving. Interview at least 3 real people who have that problem (friends and family count) about how they currently deal with it — not whether they'd use your solution. In a Google Doc, summarize each conversation and what you learned that surprised you. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Building an MVP",
+          "module_type": "module",
+          "description": "Build the smallest version of an idea that still tests the core assumption.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "product-thinking",
+            "entrepreneurship"
+          ],
+          "links": [
+            {
+              "title": "What is an MVP? — Y Combinator Startup School",
+              "url": "https://www.startupschool.org/videos/24",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "MVP Examples From Famous Startups",
+              "url": "https://www.productplan.com/glossary/minimum-viable-product/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your MVP repo or link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Build the smallest possible version of the idea you validated in the previous module — a landing page with a signup form, a no-code prototype, or a barebones working app. It should be good enough to show a real person and get a reaction. Push it to a public repo (or paste a live link in the repo's README). Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Pitching Your Idea",
+          "module_type": "assignment",
+          "description": "Explain your idea clearly and convincingly in under 3 minutes.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "entrepreneurship",
+            "public-speaking",
+            "communication"
+          ],
+          "links": [
+            {
+              "title": "How to Pitch Your Startup — Y Combinator",
+              "url": "https://www.ycombinator.com/library/6z-how-to-pitch-your-startup",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit your pitch video",
+              "url": "https://youtube.com",
+              "link_type": "submission",
+              "sub_link_type": "youtube",
+              "description": "Record a 2-3 minute pitch of your idea covering: the problem, who has it, your solution, and why now. Speak directly to camera, no slides required. Upload to YouTube as unlisted and paste the URL here.",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Basics of Business Models",
+          "module_type": "lesson",
+          "description": "Understand how companies actually make money — before you build something nobody will pay for.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "business-models",
+            "entrepreneurship"
+          ],
+          "links": [
+            {
+              "title": "Business Model Canvas Explained",
+              "url": "https://www.strategyzer.com/library/the-business-model-canvas",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Common SaaS Pricing Models — Explained",
+              "url": "https://www.priceintelligently.com/blog/bid/199217/the-ultimate-guide-to-saas-pricing-models-strategies-tactics",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your business model canvas",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Fill out a Business Model Canvas (a template is fine, or recreate the boxes in a Google Doc/Slides) for your MVP idea or any product you use daily. Cover at least: value proposition, customer segments, revenue streams, and cost structure. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Design Thinking & UI/UX Fundamentals",
+      "module_type": "path",
+      "description": "Learn to design software that people actually enjoy using, even if you're primarily a developer.",
+      "estimated_completion_time": "2 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 15,
+      "children": [
+        {
+          "title": "The Design Thinking Process",
+          "module_type": "lesson",
+          "description": "Empathize, define, ideate, prototype, test — the five-stage loop behind good design.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "design-thinking"
+          ],
+          "links": [
+            {
+              "title": "An Introduction to Design Thinking — Stanford d.school",
+              "url": "https://web.stanford.edu/~mshanks/MichaelShanks/files/509554.pdf",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Design Thinking Explained — IDEO",
+              "url": "https://www.ideou.com/pages/design-thinking",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a design thinking walkthrough",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Pick an everyday app or object you find frustrating. In a Google Doc, walk through all 5 design thinking stages applied to redesigning it: who you'd empathize with, the problem definition, 3 ideas, a rough prototype description, and how you'd test it. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Wireframing & Prototyping with Figma",
+          "module_type": "module",
+          "description": "Turn ideas into clickable mockups before writing any code.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "figma",
+            "wireframing-prototyping",
+            "ui-ux-design"
+          ],
+          "links": [
+            {
+              "title": "Figma for Beginners — Official Tutorial",
+              "url": "https://help.figma.com/hc/en-us/articles/360040314193-Figma-Quickstart-Guide",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Laws of UX — Design Principles Reference",
+              "url": "https://lawsofux.com",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your Figma prototype link",
+              "url": "https://figma.com",
+              "link_type": "submission",
+              "sub_link_type": "figma",
+              "description": "Design a clickable prototype in Figma for a small app idea (3-5 screens) — a to-do app, a food ordering flow, or a redesign of an app you use. Include at least one interactive click-through between screens. Set sharing to 'Anyone with the link can view' and paste the Figma link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Usability Testing Basics",
+          "module_type": "lesson",
+          "description": "Watch a real person use your design and learn what actually confuses them.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "usability-testing",
+            "ui-ux-design"
+          ],
+          "links": [
+            {
+              "title": "How to Conduct a Usability Test — NN/g",
+              "url": "https://www.nngroup.com/articles/usability-testing-101/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "5-Second Test & Guerrilla Testing Methods",
+              "url": "https://www.usability.gov/how-to-and-tools/methods/usability-testing.html",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your usability test findings",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Give your Figma prototype from the previous module to 2-3 people who haven't seen it, and ask them to complete a specific task without help. Watch where they get stuck or confused. In a Google Doc, summarize what you observed and 2 changes you'd make. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software Testing & Quality Assurance",
+      "module_type": "path",
+      "description": "Write code you can trust — learn manual testing thinking and how to automate it.",
+      "estimated_completion_time": "2 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 16,
+      "children": [
+        {
+          "title": "Manual Testing Fundamentals",
+          "module_type": "lesson",
+          "description": "Think like a QA engineer — how to systematically break things on purpose.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "software-testing"
+          ],
+          "links": [
+            {
+              "title": "Software Testing Fundamentals",
+              "url": "https://softwaretestingfundamentals.com",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Write Good Test Cases — Guru99",
+              "url": "https://www.guru99.com/test-case.html",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your test case document",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Pick any app you've built or use daily (e.g. a login form or a checkout flow). In a Google Sheet, write at least 10 test cases covering normal use, edge cases, and invalid input — each with steps, expected result, and pass/fail. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Writing Automated Unit Tests",
+          "module_type": "module",
+          "description": "Catch bugs automatically before they reach production.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "unit-testing",
+            "python"
+          ],
+          "links": [
+            {
+              "title": "Pytest Official Getting Started Guide",
+              "url": "https://docs.pytest.org/en/stable/getting-started.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Python Testing 101 — Real Python",
+              "url": "https://realpython.com/python-testing/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your unit-tested project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Add a pytest test suite to an existing Python project (e.g. your FastAPI backend) covering at least 8 test cases across at least 3 different functions or endpoints, including at least one test for an error case. Push to a public GitHub repo and include instructions for running the tests in the README. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Test-Driven Development",
+          "module_type": "module",
+          "description": "Write the test before the code — and see how it changes the way you design functions.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "test-driven-development",
+            "unit-testing"
+          ],
+          "links": [
+            {
+              "title": "Test-Driven Development by Example — Key Ideas",
+              "url": "https://www.oreilly.com/library/view/test-driven-development/0321146530/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "TDD in Python — Real Python",
+              "url": "https://realpython.com/python-testing/#more-advanced-testing-scenarios",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your TDD kata repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Pick a small coding kata (e.g. FizzBuzz, a string reverser, a simple calculator) and build it strictly test-first: write a failing test, write the minimum code to pass it, refactor, repeat. Push the repo showing the commit history of this red-green-refactor cycle if possible, with a README explaining your process. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cybersecurity Fundamentals",
+      "module_type": "path",
+      "description": "Understand how applications get attacked so you can build ones that don't.",
+      "estimated_completion_time": "2 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 17,
+      "children": [
+        {
+          "title": "Web Security Basics (OWASP Top 10)",
+          "module_type": "module",
+          "description": "The most common ways real web applications get exploited, and how to recognize them.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "cybersecurity",
+            "web-security"
+          ],
+          "links": [
+            {
+              "title": "OWASP Top 10 — Official",
+              "url": "https://owasp.org/www-project-top-ten/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "SQL Injection Explained — PortSwigger Academy",
+              "url": "https://portswigger.net/web-security/sql-injection",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your OWASP summary",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, pick 4 items from the OWASP Top 10 and explain in your own words: what the vulnerability is, a simple example of how it could be exploited, and one concrete way to prevent it in a real app. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Secure Coding Practices",
+          "module_type": "module",
+          "description": "Apply security thinking directly to the code you write every day.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "secure-coding",
+            "web-security"
+          ],
+          "links": [
+            {
+              "title": "Secure Coding Practices Checklist — OWASP",
+              "url": "https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Input Validation Best Practices",
+              "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your hardened project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Take an existing backend project and harden it: add input validation on every endpoint, use parameterized queries (never string-concatenated SQL), and ensure passwords are hashed, not stored in plain text. Push to a public repo with a README listing exactly what you fixed and why. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Authentication & Authorization Deep Dive",
+          "module_type": "lesson",
+          "description": "Understand the difference between 'who are you' and 'what can you do' — and why mixing them up causes real breaches.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "auth-fundamentals",
+            "web-security"
+          ],
+          "links": [
+            {
+              "title": "Authentication vs Authorization — Auth0",
+              "url": "https://auth0.com/intro-to-iam/authentication-vs-authorization",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "JWT Explained — jwt.io Introduction",
+              "url": "https://jwt.io/introduction",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your auth flow diagram and explanation",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, describe (in words or a simple diagram) how login and access control works in a project you've built or a real app you use — cover how the user is authenticated, how a session or token is issued, and how the backend decides what that user is allowed to do. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Career Growth & Workplace Skills",
+      "module_type": "path",
+      "description": "Skills for after you get the job — surviving your first months, growing deliberately, and advocating for yourself.",
+      "estimated_completion_time": "2 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 18,
+      "children": [
+        {
+          "title": "Navigating Your First 90 Days",
+          "module_type": "lesson",
+          "description": "What to prioritize when you're new — before you're expected to already know everything.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "career-growth"
+          ],
+          "links": [
+            {
+              "title": "The First 90 Days — Key Ideas Summary",
+              "url": "https://hbr.org/2010/01/the-first-90-days-with-michael-watkins",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Onboard Yourself at a New Job",
+              "url": "https://www.themuse.com/advice/onboard-yourself-new-job",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your 90-day plan",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, write a realistic 30-60-90 day plan for starting a new developer job — what you'd focus on learning in each phase, who you'd try to build relationships with, and how you'd know you're on track. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Finding and Working With a Mentor",
+          "module_type": "lesson",
+          "description": "Mentorship accelerates growth — learn to find one and actually make use of it.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "mentoring",
+            "career-growth"
+          ],
+          "links": [
+            {
+              "title": "How to Find a Mentor — Harvard Division of Continuing Education",
+              "url": "https://professional.dce.harvard.edu/blog/how-to-find-a-mentor-and-nurture-a-successful-relationship/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Making the Most of a Mentorship — MIT",
+              "url": "https://mentoring.mit.edu/mentee/making-most-mentoring",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your mentor outreach message",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, draft a genuine message you could send to someone you'd want as a mentor (a senior developer, a professor, an alum) asking for a short conversation. Then list 3 specific questions you'd want to ask them. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Performance Reviews & Self-Advocacy",
+          "module_type": "module",
+          "description": "Make sure your work actually gets noticed and credited.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "self-advocacy",
+            "career-growth"
+          ],
+          "links": [
+            {
+              "title": "How to Write a Brag Document — Julia Evans",
+              "url": "https://jvns.ca/blog/brag-documents/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Advocate for Yourself at Work — HBR",
+              "url": "https://hbr.org/2021/09/how-to-advocate-for-yourself-at-work",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your brag document",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Start a 'brag document' in a Google Doc — a running list of things you've accomplished, with real specifics (what you built, what impact it had, what you learned). Add at least 5 real entries from your own work or coursework so far. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Building a Growth Mindset at Work",
+          "module_type": "lesson",
+          "description": "Treat being wrong, corrected, or out of your depth as normal, not as a threat.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "growth-mindset",
+            "resilience"
+          ],
+          "links": [
+            {
+              "title": "Growth Mindset vs Fixed Mindset — Explained",
+              "url": "https://fs.blog/carol-dweck-mindset/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Why Junior Developers Should Embrace Not Knowing Things",
+              "url": "https://www.freecodecamp.org/news/how-to-be-a-junior-developer/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your growth mindset reflection",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, write about a time you got something wrong or didn't know something in front of others (an interview, a code review, a class). Reflect on how you reacted in the moment versus how a growth-mindset response would look, and what you'd do differently next time. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Mobile App Development (React Native & Expo)",
+      "module_type": "path",
+      "description": "Take your web development skills to iOS and Android using React Native and Expo.",
+      "estimated_completion_time": "6 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 4,
+      "children": [
+        {
+          "title": "React Native Fundamentals",
+          "module_type": "module",
+          "description": "Learn the core building blocks of React Native — components, styling, and state.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "react-native",
+            "javascript"
+          ],
+          "links": [
+            {
+              "title": "React Native Official Docs — Getting Started",
+              "url": "https://reactnative.dev/docs/getting-started",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "React Native Express — Free Course",
+              "url": "https://www.reactnative.express",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your first React Native app repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Build a simple app with at least 3 screens using core components (View, Text, TextInput, FlatList, Image). Include navigation between screens (a simple button-based navigation is fine at this stage). Push to a public GitHub repo called 'rn-fundamentals' with a README explaining how to run it. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Expo Router & Navigation",
+          "module_type": "module",
+          "description": "Use Expo Router to build file-based navigation like a real production app.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "expo",
+            "react-native"
+          ],
+          "links": [
+            {
+              "title": "Expo Router Documentation",
+              "url": "https://docs.expo.dev/router/introduction/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Expo — Create Your First App",
+              "url": "https://docs.expo.dev/tutorial/introduction/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your Expo Router project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Rebuild or extend your previous app using Expo Router with at least: a tab layout, a stack navigator for a detail screen, and one dynamic route (e.g. [id].tsx). Push to a public GitHub repo called 'expo-router-practice' with a README. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Working with APIs & Local Storage in Mobile Apps",
+          "module_type": "module",
+          "description": "Fetch data from a real API and persist data locally on the device.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "react-native",
+            "rest-apis"
+          ],
+          "links": [
+            {
+              "title": "Networking in React Native — Official Docs",
+              "url": "https://reactnative.dev/docs/network",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "AsyncStorage Documentation",
+              "url": "https://react-native-async-storage.github.io/async-storage/docs/usage/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your API-connected app repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Build an app that fetches data from a free public API (e.g. https://jsonplaceholder.typicode.com, https://openweathermap.org, or https://rickandmortyapi.com), displays it in a scrollable list, and lets the user save at least one item locally using AsyncStorage so it persists after closing the app. Push to a public GitHub repo with a README. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Native Device Features",
+          "module_type": "lesson",
+          "description": "Access the camera, location, and notifications using Expo's device APIs.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "expo",
+            "mobile-development"
+          ],
+          "links": [
+            {
+              "title": "Expo Camera API",
+              "url": "https://docs.expo.dev/versions/latest/sdk/camera/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Expo Location API",
+              "url": "https://docs.expo.dev/versions/latest/sdk/location/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Expo Notifications API",
+              "url": "https://docs.expo.dev/versions/latest/sdk/notifications/",
+              "link_type": "resources",
+              "order_index": 2
+            },
+            {
+              "title": "Submit a repo using at least one native device feature",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Build a small app that uses at least one native device capability — camera, location, or local notifications. For example: a photo journal, a 'find my location' screen, or a reminder app that schedules a local notification. Push to a public GitHub repo with a README describing which feature you used and why. Paste the repo URL here.",
+              "order_index": 3
+            }
+          ]
+        },
+        {
+          "title": "Full Mobile App Project",
+          "module_type": "project",
+          "description": "Design, build, and ship a complete mobile app end to end.",
+          "estimated_completion_time": "2 weeks",
+          "created_by": "admin@risetogether.in",
+          "order_index": 4,
+          "skills": [
+            "react-native",
+            "expo",
+            "mobile-development",
+            "rest-apis"
+          ],
+          "links": [
+            {
+              "title": "Publishing to Expo / EAS Build Docs",
+              "url": "https://docs.expo.dev/build/introduction/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit your full mobile app repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Push your completed app to a public GitHub repo. It should combine navigation, an API or backend connection, and at least one native device feature or persisted local state. Include a README with setup instructions, screenshots, and a feature list. Paste the repo URL here.",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a 2-4 minute demo video",
+              "url": "https://youtube.com",
+              "link_type": "submission",
+              "sub_link_type": "youtube",
+              "description": "Record a screen recording (using your phone screen or a simulator) walking through your app's main features. Keep it under 4 minutes. Upload to YouTube as unlisted and paste the URL here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cloud & DevOps Fundamentals",
+      "module_type": "path",
+      "description": "Learn how real applications get packaged, tested automatically, and deployed to the cloud.",
+      "estimated_completion_time": "4 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 5,
+      "children": [
+        {
+          "title": "Docker & Containerization",
+          "module_type": "module",
+          "description": "Package your applications so they run identically everywhere.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "docker"
+          ],
+          "links": [
+            {
+              "title": "Docker Official Getting Started Guide",
+              "url": "https://docs.docker.com/get-started/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Docker Curriculum — A Comprehensive Guide",
+              "url": "https://docker-curriculum.com",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your Dockerized project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Take any past project (e.g. your FastAPI backend) and write a Dockerfile for it. Build the image locally and confirm the container runs correctly. Push a public repo containing the Dockerfile, a .dockerignore, and a README with the exact build and run commands. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "CI/CD Basics",
+          "module_type": "lesson",
+          "description": "Automate testing and deployment so code ships safely and consistently.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "ci-cd",
+            "git"
+          ],
+          "links": [
+            {
+              "title": "GitHub Actions Official Documentation",
+              "url": "https://docs.github.com/en/actions",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "CI/CD Explained — Atlassian",
+              "url": "https://www.atlassian.com/continuous-delivery/continuous-integration",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a repo with a working GitHub Actions workflow",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Add a GitHub Actions workflow (.github/workflows/ci.yml) to any existing project that automatically runs on every push — at minimum it should install dependencies and run your test suite or a linter. Make sure the workflow passes (green check) at least once. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Cloud Deployment",
+          "module_type": "module",
+          "description": "Get a real application live on the internet using a modern cloud platform.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "cloud-deployment",
+            "aws"
+          ],
+          "links": [
+            {
+              "title": "Render — Deploy a Web Service",
+              "url": "https://render.com/docs/deploy-fastapi",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Railway Documentation",
+              "url": "https://docs.railway.app",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "AWS Free Tier Overview",
+              "url": "https://aws.amazon.com/free/",
+              "link_type": "resources",
+              "order_index": 2
+            },
+            {
+              "title": "Submit your live deployed app URL",
+              "url": "https://example.com",
+              "link_type": "submission",
+              "sub_link_type": "other",
+              "description": "Deploy any working backend or full-stack project to a live URL using Render, Railway, Fly.io, or AWS. Confirm it's reachable and functional from a browser or Postman. Paste the live URL here (not the GitHub repo).",
+              "order_index": 3
+            }
+          ]
+        },
+        {
+          "title": "Monitoring & Logging Basics",
+          "module_type": "lesson",
+          "description": "Understand how teams know when something breaks in production before users complain.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "monitoring-logging"
+          ],
+          "links": [
+            {
+              "title": "Logging Best Practices — Better Stack",
+              "url": "https://betterstack.com/community/guides/logging/logging-best-practices/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "What is Observability? — Honeycomb",
+              "url": "https://www.honeycomb.io/what-is-observability",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your logging setup repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Add structured logging (e.g. Python's logging module or a library like structlog) to a backend project — log at minimum every incoming request and every error, with timestamps. Include a README explaining what you log and why. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "System Design Basics",
+      "module_type": "path",
+      "description": "Understand how large-scale systems are designed — a core skill for technical interviews and senior roles.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 6,
+      "children": [
+        {
+          "title": "Scalability Fundamentals",
+          "module_type": "lesson",
+          "description": "Learn the core vocabulary: horizontal vs vertical scaling, latency vs throughput, and CAP theorem.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "system-design"
+          ],
+          "links": [
+            {
+              "title": "System Design Primer (GitHub)",
+              "url": "https://github.com/donnemartin/system-design-primer",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Scalability for Dummies",
+              "url": "https://www.lecloud.net/tagged/scalability",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your scalability concepts summary",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, explain in your own words (300-400 words): horizontal vs vertical scaling, latency vs throughput, and the CAP theorem, with one real-world example for each. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Databases at Scale",
+          "module_type": "module",
+          "description": "Learn how databases handle huge amounts of data and traffic — sharding, replication, and indexing.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "system-design",
+            "postgresql",
+            "sql"
+          ],
+          "links": [
+            {
+              "title": "Database Sharding Explained",
+              "url": "https://www.digitalocean.com/community/tutorials/understanding-database-sharding",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Database Replication — AWS",
+              "url": "https://aws.amazon.com/what-is/database-replication/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Use The Index, Luke — Indexing Deep Dive",
+              "url": "https://use-the-index-luke.com",
+              "link_type": "resources",
+              "order_index": 2
+            },
+            {
+              "title": "Submit a database scaling case study",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Pick one real company's public engineering blog post about scaling their database (search e.g. 'Instagram database sharding', 'Notion Postgres scaling'). Summarize in a Google Doc: what problem they had, what solution they used, and one trade-off they accepted. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 3
+            }
+          ]
+        },
+        {
+          "title": "Caching & Load Balancing",
+          "module_type": "module",
+          "description": "Speed up systems and distribute traffic across multiple servers.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "caching",
+            "load-balancing",
+            "system-design"
+          ],
+          "links": [
+            {
+              "title": "Caching Strategies — AWS",
+              "url": "https://aws.amazon.com/caching/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Load Balancing Explained — NGINX",
+              "url": "https://www.nginx.com/resources/glossary/load-balancing/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Redis Documentation",
+              "url": "https://redis.io/docs/latest/",
+              "link_type": "resources",
+              "order_index": 2
+            },
+            {
+              "title": "Submit a repo demonstrating caching",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Add a simple in-memory or Redis-based cache to any API endpoint in an existing project so repeated requests are served faster. Include a README showing response times before and after caching. Paste the repo URL here.",
+              "order_index": 3
+            }
+          ]
+        },
+        {
+          "title": "System Design Interview Practice",
+          "module_type": "assignment",
+          "description": "Put it all together by designing a system end to end, the way you would in an interview.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "system-design",
+            "communication"
+          ],
+          "links": [
+            {
+              "title": "Grokking the System Design Interview — Free Overview",
+              "url": "https://www.designgurus.io/course/grokking-the-system-design-interview",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit your system design write-up",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Design one system of your choice (e.g. a URL shortener, a basic Twitter feed, or a ride-sharing app's core booking flow). In a Google Doc, cover: requirements, high-level architecture diagram (can be a simple drawing or described in text), database schema, and how you'd handle scale. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a video explaining your design",
+              "url": "https://youtube.com",
+              "link_type": "submission",
+              "sub_link_type": "youtube",
+              "description": "Record a 4-6 minute video walking through your system design write-up as if presenting it in an interview. Upload to YouTube as unlisted and paste the URL here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Open Source Contribution",
+      "module_type": "path",
+      "description": "Learn how open source works and make your first real contributions to public projects.",
+      "estimated_completion_time": "2 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 7,
+      "children": [
+        {
+          "title": "Understanding Open Source",
+          "module_type": "lesson",
+          "description": "Learn licenses, contribution etiquette, and how open source communities work.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "open-source",
+            "git"
+          ],
+          "links": [
+            {
+              "title": "Open Source Guides",
+              "url": "https://opensource.guide",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Choose an Open Source License",
+              "url": "https://choosealicense.com",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a summary of an open source project you admire",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "Pick one open source project you use or admire. In a Google Doc, write 200-300 words on: what it does, what license it uses, how contributions are submitted (check their CONTRIBUTING.md), and one thing you learned reading their codebase or issues. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Finding & Making Your First Contribution",
+          "module_type": "module",
+          "description": "Go from reading code to submitting a real pull request.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "open-source",
+            "git"
+          ],
+          "links": [
+            {
+              "title": "Good First Issues — Curated List",
+              "url": "https://goodfirstissue.dev",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "First Contributions — Practice Repo",
+              "url": "https://github.com/firstcontributions/first-contributions",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "How to Write a Good Pull Request",
+              "url": "https://github.blog/2015-01-21-how-to-write-the-perfect-pull-request/",
+              "link_type": "resources",
+              "order_index": 2
+            },
+            {
+              "title": "Submit a link to your pull request",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Find a 'good first issue' on a real open source project (docs fixes count!) and submit a pull request. It doesn't need to be merged yet — it just needs to be genuinely submitted and following the project's contribution guidelines. Paste the direct URL to your pull request (not the project's homepage).",
+              "order_index": 3
+            }
+          ]
+        },
+        {
+          "title": "Maintaining Your Own Open Source Project",
+          "module_type": "project",
+          "description": "Experience the other side — publish and maintain a small open source tool of your own.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "open-source",
+            "git",
+            "professional-writing"
+          ],
+          "links": [
+            {
+              "title": "Writing a Good Project README",
+              "url": "https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit your open source project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Publish a small, genuinely useful tool or library (a CLI utility, a small npm/pip package, a code snippet collection) as a public repo. It must include: a clear README, a LICENSE file, and a CONTRIBUTING.md explaining how others could contribute. Paste the repo URL here.",
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data Science & Analytics Foundations",
+      "module_type": "path",
+      "description": "Learn to work with real data — clean it, analyze it, visualize it, and build your first models.",
+      "estimated_completion_time": "5 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 8,
+      "children": [
+        {
+          "title": "Python for Data Analysis (Pandas & NumPy)",
+          "module_type": "module",
+          "description": "The two libraries every data analyst and scientist uses daily.",
+          "estimated_completion_time": "1.5 weeks",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "pandas",
+            "numpy",
+            "python"
+          ],
+          "links": [
+            {
+              "title": "Pandas Official 10 Minutes Guide",
+              "url": "https://pandas.pydata.org/docs/user_guide/10min.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "NumPy Quickstart",
+              "url": "https://numpy.org/doc/stable/user/quickstart.html",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Kaggle — Pandas Micro-Course",
+              "url": "https://www.kaggle.com/learn/pandas",
+              "link_type": "resources",
+              "order_index": 2
+            },
+            {
+              "title": "Submit your data cleaning notebook repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Download any messy public dataset from Kaggle or data.gov.in. Using Pandas, clean it (handle missing values, fix data types, remove duplicates) and answer at least 5 questions about it using groupby, filtering, and aggregation. Push the Jupyter notebook and the dataset (or a link to it) to a public GitHub repo. Paste the repo URL here.",
+              "order_index": 3
+            }
+          ]
+        },
+        {
+          "title": "Data Visualization",
+          "module_type": "module",
+          "description": "Turn raw numbers into charts that actually communicate something.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "data-visualization",
+            "pandas"
+          ],
+          "links": [
+            {
+              "title": "Matplotlib Official Tutorials",
+              "url": "https://matplotlib.org/stable/tutorials/index.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Seaborn Official Tutorial",
+              "url": "https://seaborn.pydata.org/tutorial.html",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Data Visualization Best Practices — Storytelling with Data",
+              "url": "https://www.storytellingwithdata.com/blog",
+              "link_type": "resources",
+              "order_index": 2
+            },
+            {
+              "title": "Submit your data visualization notebook repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Using the dataset from the previous module (or a new one), create at least 4 different chart types (e.g. bar, line, scatter, histogram) using Matplotlib or Seaborn, each with clear titles and labels. Add a short written insight below each chart explaining what it shows. Push the notebook to a public GitHub repo. Paste the repo URL here.",
+              "order_index": 3
+            }
+          ]
+        },
+        {
+          "title": "Intro to Machine Learning",
+          "module_type": "module",
+          "description": "Understand the core ideas behind machine learning and train your first model.",
+          "estimated_completion_time": "1.5 weeks",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "machine-learning",
+            "python",
+            "data-science"
+          ],
+          "links": [
+            {
+              "title": "Scikit-learn Official Getting Started",
+              "url": "https://scikit-learn.org/stable/getting_started.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Google's Machine Learning Crash Course",
+              "url": "https://developers.google.com/machine-learning/crash-course",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your first ML model repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Using scikit-learn, train a simple classification or regression model on a beginner-friendly dataset (e.g. Titanic survival, Iris species, or house prices on Kaggle). Include: a train/test split, at least one evaluation metric (accuracy, RMSE, etc.), and a short written conclusion about how well it performed. Push the notebook to a public GitHub repo. Paste the repo URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Data Science Mini Project",
+          "module_type": "project",
+          "description": "Combine everything into one polished, end-to-end analysis you can show off.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "data-science",
+            "pandas",
+            "data-visualization",
+            "machine-learning"
+          ],
+          "links": [
+            {
+              "title": "Submit your data science project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "description": "Pick a dataset and question you genuinely care about (sports stats, college placement data, weather, cricket scores — anything). Push a public repo containing: data cleaning, at least 3 visualizations, one simple model or statistical finding, and a README that reads like a mini case study (problem, approach, findings). Paste the repo URL here.",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a 3-5 minute walkthrough video",
+              "url": "https://youtube.com",
+              "link_type": "submission",
+              "sub_link_type": "youtube",
+              "description": "Record yourself walking through your findings as if presenting to a non-technical stakeholder — focus on the 'so what', not just the code. Upload to YouTube as unlisted and paste the URL here.",
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Freelancing & Personal Branding",
+      "module_type": "path",
+      "description": "Build an online presence and learn how to win freelance work while still in college.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 9,
+      "children": [
+        {
+          "title": "Building a Portfolio Website",
+          "module_type": "module",
+          "description": "Every developer needs one place that shows recruiters and clients what you can do.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "portfolio-building",
+            "html-css",
+            "javascript"
+          ],
+          "links": [
+            {
+              "title": "How to Build a Developer Portfolio — freeCodeCamp",
+              "url": "https://www.freecodecamp.org/news/how-to-build-a-developer-portfolio-website/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Portfolio Examples — Awwwards",
+              "url": "https://www.awwwards.com/websites/portfolio/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your live portfolio site",
+              "url": "https://example.com",
+              "link_type": "submission",
+              "sub_link_type": "other",
+              "description": "Build and deploy a personal portfolio website (Vercel, Netlify, or GitHub Pages all work and are free) that includes: an about section, at least 3 real projects with links, your skills, and a way to contact you. Paste the live URL here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Freelance Platforms & Proposals",
+          "module_type": "lesson",
+          "description": "Understand how freelance marketplaces work and how to write proposals that win work.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "freelancing",
+            "professional-writing"
+          ],
+          "links": [
+            {
+              "title": "How to Write a Winning Upwork Proposal",
+              "url": "https://www.upwork.com/resources/how-to-write-a-proposal-on-upwork",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Freelancing 101 — Indie Hackers",
+              "url": "https://www.indiehackers.com/post/freelancing-101",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your freelance proposal drafts",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "description": "In a Google Doc, write 2 freelance proposals for 2 different real job postings you find on Upwork, Fiverr, or a local freelance community — paste the job description above each proposal for context. Each proposal should be specific to that job, not generic. Share with 'Anyone with the link can view' and paste the link here.",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "Personal Branding & Content Creation",
+          "module_type": "module",
+          "description": "Build in public and let your work speak for itself online.",
+          "estimated_completion_time": "1 week",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "personal-branding",
+            "content-creation",
+            "linkedin"
+          ],
+          "links": [
+            {
+              "title": "Build in Public — A Practical Guide",
+              "url": "https://www.buildinpublic.xyz",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "How to Write Technical Blog Posts Developers Actually Read",
+              "url": "https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit a link to your technical blog post or thread",
+              "url": "https://example.com",
+              "link_type": "submission",
+              "sub_link_type": "other",
+              "description": "Write and publish one piece of technical content — a blog post (Hashnode, Dev.to, or Medium), a LinkedIn post, or an X/Twitter thread — explaining something you built or learned. Paste the direct published URL here.",
+              "order_index": 2
+            }
+          ]
+        }
+      ]
+    },
     {
       "title":                     "Technical Foundation",
       "module_type":               "path",
