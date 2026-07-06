@@ -175,8 +175,22 @@ const LearningPaths = () => {
             {/* Cards Grid */}
             <section className="mx-auto max-w-6xl px-6 py-8 pb-20">
               {filteredPaths.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-border p-12 text-center text-muted-foreground">
-                  No paths found. Try a different search query or select another tab.
+                <div className="rounded-2xl border border-dashed border-border p-12 text-center text-muted-foreground bg-white/30 backdrop-blur-sm">
+                  {activeTab === "yours" && yourPaths.length === 0 ? (
+                    <div>
+                      <p className="font-semibold text-base text-foreground mb-1">You haven't started studying any paths yet</p>
+                      <p className="text-sm text-muted-foreground">Switch to the "All Paths" tab to browse resources and enroll!</p>
+                    </div>
+                  ) : query.trim() ? (
+                    <div>
+                      <p className="font-semibold text-base text-foreground mb-1">No paths match "{query}"</p>
+                      <p className="text-sm text-muted-foreground">Try searching with a different topic, skill, or keyword.</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="font-semibold text-base text-foreground mb-1">No paths found</p>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -198,4 +212,4 @@ const LearningPaths = () => {
   );
 };
 
-export default LearningPaths;
+export default LearningPaths;
