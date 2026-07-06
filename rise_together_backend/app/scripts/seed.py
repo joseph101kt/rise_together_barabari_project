@@ -11,6 +11,7 @@ Every link has OG metadata fetched at seed time.
 """
 
 import json
+import logging
 from pathlib import Path
 
 import app.models  # noqa: F401 — registers all models before create_all
@@ -27,6 +28,10 @@ from app.models.user_profile import UserProfile
 from app.models.user_profile_link import UserProfileLink
 from app.services.link_services import LinkService
 from passlib.context import CryptContext
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -48,7 +53,7 @@ def get_or_create(db, model, filter_by: dict, defaults: dict = None):
 
 
 def make_link(db, *, title: str, url: str, link_type: LinkType, created_by: int, description: str | None = None) -> Link:
-    print(f"      fetching OG: {url}")
+    logger.info("      fetching OG: %s", url)
     metadata = LinkService.fetch_metadata(url)
     link = Link(
         title=title,
@@ -71,7 +76,7 @@ def make_link(db, *, title: str, url: str, link_type: LinkType, created_by: int,
 # ---------------------------------------------------------------------------
 
 def seed_skills(db, skill_data: list[dict]) -> dict[str, Skill]:
-    print("Seeding skills...")
+    logger.info("Seeding skills...")
     skills: dict[str, Skill] = {}
     for entry in skill_data:
         skill, created = get_or_create(
@@ -79,7 +84,7 @@ def seed_skills(db, skill_data: list[dict]) -> dict[str, Skill]:
         )
         skills[entry["slug"]] = skill
         if created:
-            print(f"  + {entry['name']}")
+            logger.info("  + %s", entry['name'])
     return skills
 
 
@@ -88,7 +93,7 @@ def seed_users(
     user_data: list[dict],
     skills: dict[str, Skill],
 ) -> dict[str, User]:
-    print("\nSeeding users...")
+    logger.info("Seeding users...")
     users: dict[str, User] = {}
 
     for entry in user_data:
@@ -107,7 +112,7 @@ def seed_users(
         if not created:
             continue
 
-        print(f"  + {entry['email']} / {entry['password']}  [{entry['role']}]")
+        logger.info("  + %s / %s  [%s]", entry['email'], entry['password'], entry['role'])
 
         if profile := entry.get("profile"):
             db.add(UserProfile(
@@ -131,7 +136,7 @@ def seed_users(
             if slug in skills:
                 db.add(UserSkill(user_id=user.id, skill_id=skills[slug].id))
             else:
-                print(f"    ! unknown skill slug '{slug}' for user {entry['email']}, skipping")
+                logger.warning("    ! unknown skill slug '%s' for user %s, skipping", slug, entry['email'])
 
         for pl in entry.get("profile_links", []):
             link = make_link(
@@ -179,7 +184,7 @@ def seed_modules(
 
         indent = "  " if parent_id is None else "    "
         if created:
-            print(f"{indent}+ [{entry['module_type']}] {entry['title']}")
+            logger.info("%s+ [%s] %s", indent, entry['module_type'], entry['title'])
             db.flush()
 
             for link_entry in entry.get("links", []):
@@ -205,7 +210,7 @@ def seed_modules(
                 if slug in skills:
                     db.add(ModuleSkill(module_id=module.id, skill_id=skills[slug].id))
                 else:
-                    print(f"      ! unknown skill slug '{slug}' for module '{entry['title']}', skipping")
+                    logger.warning("      ! unknown skill slug '%s' for module '%s', skipping", slug, entry['title'])
 
             db.flush()
 
@@ -236,15 +241,15 @@ def seed():
         skills = seed_skills(db, data.get("skills", []))
         users  = seed_users(db, data.get("users", []), skills)
 
-        print("\nSeeding modules...")
+        logger.info("Seeding modules...")
         seed_modules(db, data.get("modules", []), skills, users)
 
         db.commit()
-        print("\nSeed complete.")
+        logger.info("Seed complete.")
 
     except Exception as e:
         db.rollback()
-        print(f"\nSeed failed: {e}")
+        logger.error("Seed failed: %s", e)
         raise
     finally:
         db.close()

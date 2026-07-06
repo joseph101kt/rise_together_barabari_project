@@ -1,857 +1,1114 @@
 {
   "skills": [
-    { "name": "Python",                "slug": "python" },
-    { "name": "FastAPI",               "slug": "fastapi" },
-    { "name": "SQL",                   "slug": "sql" },
-    { "name": "PostgreSQL",            "slug": "postgresql" },
-    { "name": "Git",                   "slug": "git" },
-    { "name": "HTML & CSS",            "slug": "html-css" },
-    { "name": "JavaScript",            "slug": "javascript" },
-    { "name": "REST APIs",             "slug": "rest-apis" },
-    { "name": "Linux & CLI",           "slug": "linux-cli" },
-    { "name": "Data Structures",       "slug": "data-structures" },
-    { "name": "Algorithms",            "slug": "algorithms" },
-    { "name": "Postman",               "slug": "postman" },
-    { "name": "Problem Solving",       "slug": "problem-solving" },
-    { "name": "Communication",         "slug": "communication" },
-    { "name": "Resume Writing",        "slug": "resume-writing" },
-    { "name": "LinkedIn",              "slug": "linkedin" },
-    { "name": "Public Speaking",       "slug": "public-speaking" },
-    { "name": "Time Management",       "slug": "time-management" },
-    { "name": "Teamwork",              "slug": "teamwork" },
-    { "name": "Email Writing",         "slug": "email-writing" },
-    { "name": "Interview Skills",      "slug": "interview-skills" },
-    { "name": "Critical Thinking",     "slug": "critical-thinking" },
-    { "name": "Networking",            "slug": "networking" },
-    { "name": "Professional Writing",  "slug": "professional-writing" }
+    { "name": "Python", "slug": "python" },
+    { "name": "FastAPI", "slug": "fastapi" },
+    { "name": "SQL", "slug": "sql" },
+    { "name": "Git", "slug": "git" },
+    { "name": "HTML & CSS", "slug": "html-css" },
+    { "name": "JavaScript", "slug": "javascript" },
+    { "name": "Problem Solving", "slug": "problem-solving" },
+    { "name": "Communication", "slug": "communication" },
+    { "name": "Resume Writing", "slug": "resume-writing" },
+    { "name": "LinkedIn", "slug": "linkedin" },
+    { "name": "Java", "slug": "java" },
+    { "name": "MongoDB", "slug": "mongodb" },
+    { "name": "Node & Express", "slug": "node-express" },
+    { "name": "React", "slug": "react" },
+    { "name": "Tailwind CSS", "slug": "tailwind" }
   ],
-
   "users": [
     {
-      "email":    "admin@risetogether.in",
-      "name":     "Rise Together Admin",
+      "email": "admin@risetogether.in",
+      "name": "Rise Together Admin",
       "password": "admin123",
-      "role":     "admin"
+      "role": "admin"
+    },
+    {
+      "email": "priya@example.com",
+      "name": "Priya Sharma",
+      "password": "password123",
+      "role": "learner",
+      "profile": {
+        "headline": "CS student at Govt Engineering College, Nagpur",
+        "bio": "First-gen tech student trying to break into the industry."
+      },
+      "education": [
+        {
+          "institution": "Government Engineering College, Nagpur",
+          "degree": "B.E.",
+          "field_of_study": "Computer Science"
+        }
+      ],
+      "skills": [
+        "python",
+        "html-css",
+        "git"
+      ],
+      "profile_links": [
+        {
+          "title": "Priya's GitHub",
+          "url": "https://github.com",
+          "link_type": "github"
+        }
+      ]
     }
   ],
-
   "modules": [
     {
-      "title":                     "Technical Foundation",
-      "module_type":               "path",
-      "description":               "Build the core technical skills every developer needs before writing their first real application.",
-      "estimated_completion_time": "6 weeks",
-      "created_by":                "admin@risetogether.in",
-      "order_index":               0,
-      "children": [
-        {
-          "title":                     "Git & Version Control",
-          "module_type":               "module",
-          "description":               "Learn to track your code, collaborate with others, and never lose your work again.",
-          "estimated_completion_time": "4 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               0,
-          "skills":                    ["git"],
-          "links": [
-            {
-              "title":       "Git Handbook — GitHub Guides",
-              "url":         "https://guides.github.com/introduction/git-handbook/",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "Learn Git Branching (Interactive)",
-              "url":         "https://learngitbranching.js.org",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Atlassian Git Tutorials",
-              "url":         "https://www.atlassian.com/git/tutorials",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your GitHub profile",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Create a GitHub account at github.com if you don't have one. Add a profile picture, your real name, and a short bio. Then copy your profile URL — it looks like github.com/yourusername — and paste it here.",
-              "order_index": 3
-            },
-            {
-              "title":       "Submit a repo with at least 3 meaningful commits",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Create a new public repository on github.com, add a README.md explaining what the project is, and make at least 3 commits showing different stages of your work (not all at once). Paste the repo URL — github.com/yourusername/repo-name — here.",
-              "order_index": 4
-            }
-          ]
-        },
-
-        {
-          "title":                     "Linux & Command Line",
-          "module_type":               "lesson",
-          "description":               "Get comfortable with the terminal. Most dev environments and servers run Linux.",
-          "estimated_completion_time": "3 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               1,
-          "skills":                    ["linux-cli"],
-          "links": [
-            {
-              "title":       "Linux Command Line Basics — Ubuntu",
-              "url":         "https://ubuntu.com/tutorials/command-line-for-beginners",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "The Linux Command Line (free book)",
-              "url":         "https://linuxcommand.org/tlcl.php",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit a repo containing your shell scripts",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Create a public GitHub repo called 'linux-practice'. Write at least 3 small bash scripts — for example: one that creates a folder structure, one that searches for a word in files, one that lists all .py files in a directory. Add a README explaining what each script does. Paste the repo URL here.",
-              "order_index": 2
-            }
-          ]
-        },
-
-        {
-          "title":                     "Python Fundamentals",
-          "module_type":               "module",
-          "description":               "Core Python every backend developer needs — variables, functions, loops, OOP, and file handling.",
-          "estimated_completion_time": "2 weeks",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               2,
-          "skills":                    ["python", "problem-solving"],
-          "links": [
-            {
-              "title":       "Python Official Tutorial",
-              "url":         "https://docs.python.org/3/tutorial/",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "Automate the Boring Stuff with Python",
-              "url":         "https://automatetheboringstuff.com",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Real Python — Python Basics",
-              "url":         "https://realpython.com/python-basics/",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your Python fundamentals repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Create a public GitHub repo called 'python-fundamentals'. Add Python files covering at least: variables and data types, loops and conditionals, functions with arguments and return values, a class with at least two methods, and reading/writing a text file. Each file should have comments explaining what the code does. Paste the repo URL here.",
-              "order_index": 3
-            }
-          ]
-        },
-
-        {
-          "title":                     "Data Structures & Algorithms",
-          "module_type":               "module",
-          "description":               "The concepts that show up in every technical interview and help you write faster, smarter code.",
-          "estimated_completion_time": "3 weeks",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               3,
-          "skills":                    ["data-structures", "algorithms", "problem-solving"],
-          "links": [
-            {
-              "title":       "Visualgo — Algorithm Visualizations",
-              "url":         "https://visualgo.net",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "GeeksforGeeks — Data Structures",
-              "url":         "https://www.geeksforgeeks.org/data-structures/",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "NeetCode Roadmap",
-              "url":         "https://neetcode.io/roadmap",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your DSA implementations repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Create a public GitHub repo called 'dsa-practice'. Implement from scratch in Python (no importing built-in data structure libraries): a stack, a queue, a singly linked list, binary search, and merge sort. Each should be in its own file with a short docstring and example usage. Include a README listing what is implemented. Paste the repo URL here.",
-              "order_index": 3
-            }
-          ]
-        },
-
-        {
-          "title":                     "SQL & Databases",
-          "module_type":               "module",
-          "description":               "Write real queries, understand joins, and stop being afraid of databases.",
-          "estimated_completion_time": "1 week",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               4,
-          "skills":                    ["sql", "postgresql", "problem-solving"],
-          "links": [
-            {
-              "title":       "SQLBolt — Interactive SQL Tutorial",
-              "url":         "https://sqlbolt.com",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "PostgreSQL Tutorial",
-              "url":         "https://www.postgresqltutorial.com",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Use The Index, Luke — SQL Performance",
-              "url":         "https://use-the-index-luke.com",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your SQL mini-project repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Create a public GitHub repo called 'sql-practice'. Include a single .sql file with: CREATE TABLE statements for a small project of your choice (e.g. a library, a student database, a shop), INSERT statements with at least 10 rows of sample data, and at least 6 SELECT queries using WHERE, JOIN, GROUP BY, ORDER BY, and a subquery. Add a README describing the project. Paste the repo URL here.",
-              "order_index": 3
-            }
-          ]
-        }
-      ]
-    },
-
-    {
-      "title":                     "Web & Backend Development",
-      "module_type":               "path",
-      "description":               "Build real web applications. Go from HTML basics to shipping a working backend API.",
+      "title": "Getting Job-Ready",
+      "module_type": "path",
+      "description": "Everything you need to land your first tech job.",
       "estimated_completion_time": "8 weeks",
-      "created_by":                "admin@risetogether.in",
-      "order_index":               1,
+      "created_by": "admin@risetogether.in",
+      "order_index": 0,
       "children": [
         {
-          "title":                     "HTML & CSS Basics",
-          "module_type":               "module",
-          "description":               "Build the visual layer of any web application. Learn how browsers render content and how to style it.",
-          "estimated_completion_time": "1 week",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               0,
-          "skills":                    ["html-css"],
-          "links": [
-            {
-              "title":       "MDN — HTML Basics",
-              "url":         "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "MDN — CSS Basics",
-              "url":         "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Flexbox Froggy — Interactive CSS Layout",
-              "url":         "https://flexboxfroggy.com",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your personal webpage repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Build a personal webpage using only HTML and CSS — no JavaScript. It must include: a header with your name and a tagline, an about section, a list of skills, and a footer with links. Push to a public GitHub repo called 'my-webpage'. Enable GitHub Pages under Settings → Pages so the page is live at yourusername.github.io/my-webpage. Paste the repo URL here.",
-              "order_index": 3
-            }
-          ]
-        },
-
-        {
-          "title":                     "JavaScript Fundamentals",
-          "module_type":               "module",
-          "description":               "Add interactivity to web pages and understand how the modern web actually works.",
-          "estimated_completion_time": "2 weeks",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               1,
-          "skills":                    ["javascript", "problem-solving"],
-          "links": [
-            {
-              "title":       "The Modern JavaScript Tutorial (javascript.info)",
-              "url":         "https://javascript.info",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "MDN — JavaScript First Steps",
-              "url":         "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit your JavaScript mini-project repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Build a small interactive project using vanilla JavaScript — ideas include a to-do list, a quiz app, a tip calculator, or a colour palette generator. The project must manipulate the DOM and respond to at least one user event. Push to a public GitHub repo with a README explaining what it does and how to open it locally. Paste the repo URL here.",
-              "order_index": 2
-            }
-          ]
-        },
-
-        {
-          "title":                     "REST APIs & HTTP",
-          "module_type":               "lesson",
-          "description":               "Understand how the web communicates. Every backend and frontend developer needs this foundation.",
-          "estimated_completion_time": "2 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               2,
-          "skills":                    ["rest-apis", "postman"],
-          "links": [
-            {
-              "title":       "What is a REST API? — RedHat",
-              "url":         "https://www.redhat.com/en/topics/api/what-is-a-rest-api",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "HTTP Status Codes — MDN",
-              "url":         "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Postman Learning Center — Getting Started",
-              "url":         "https://learning.postman.com/docs/getting-started/introduction/",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your Postman collection repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Use Postman to test a free public API — good choices are https://jsonplaceholder.typicode.com or https://api.github.com. Make at least 5 requests covering GET with filters, POST with a request body, and a DELETE. In Postman, go to your collection → Export → save the .json file. Add it to a public GitHub repo called 'api-practice' with a README explaining each request and what response you got. Paste the repo URL here.",
-              "order_index": 3
-            }
-          ]
-        },
-
-        {
-          "title":                     "FastAPI Backend Development",
-          "module_type":               "module",
-          "description":               "Build production-grade Python APIs with automatic docs, request validation, and clean structure.",
-          "estimated_completion_time": "2 weeks",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               3,
-          "skills":                    ["fastapi", "python", "rest-apis"],
-          "links": [
-            {
-              "title":       "FastAPI Official Tutorial",
-              "url":         "https://fastapi.tiangolo.com/tutorial/",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "Pydantic v2 Documentation",
-              "url":         "https://docs.pydantic.dev/latest/",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit your FastAPI project repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Build a FastAPI application with at least: 3 routes (one GET that returns a list, one POST that accepts a request body, one DELETE), Pydantic models for request and response validation, and an in-memory data store (a Python list or dict — no database needed yet). Push to a public GitHub repo with a README that includes setup instructions and example curl commands for each endpoint. Paste the repo URL here.",
-              "order_index": 2
-            }
-          ]
-        },
-
-        {
-          "title":                     "Full Backend Project",
-          "module_type":               "project",
-          "description":               "Ship a complete backend application — design, build, test, document, and demo it.",
-          "estimated_completion_time": "2 weeks",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               4,
-          "skills":                    ["fastapi", "sql", "postgresql", "git", "rest-apis", "problem-solving"],
-          "links": [
-            {
-              "title":       "Writing a Good Project README — freeCodeCamp",
-              "url":         "https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "API Documentation Best Practices — Swagger",
-              "url":         "https://swagger.io/blog/api-documentation/best-practices-in-api-documentation/",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit your project repo",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Push your completed backend project to a public GitHub repo. The repo must include: a README with what the project does, how to run it locally (step by step), and a list of all API endpoints with example requests; a requirements.txt or pyproject.toml; and at least one PostgreSQL table with real data. Make sure the repo is public. Paste the repo URL here.",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit a 2–4 minute demo video",
-              "url":         "https://youtube.com",
-              "link_type":   "submission",
-              "sub_link_type": "youtube",
-              "description": "Record a screen recording where you: briefly show your code structure (30 seconds), start the server, and then demo at least 3 API calls using Postman or the FastAPI /docs page. Keep it under 4 minutes. Free tools: Loom (loom.com) — records screen and webcam simultaneously with no editing needed. Upload to YouTube as unlisted and paste the video URL here.",
-              "order_index": 3
-            }
-          ]
-        }
-      ]
-    },
-
-    {
-      "title":                     "Career Readiness",
-      "module_type":               "path",
-      "description":               "Everything you need to present yourself confidently to recruiters and land your first tech job.",
-      "estimated_completion_time": "3 weeks",
-      "created_by":                "admin@risetogether.in",
-      "order_index":               2,
-      "children": [
-        {
-          "title":                     "Build Your GitHub Profile",
-          "module_type":               "module",
-          "description":               "Your GitHub profile is your developer resume. Make it tell your story at a glance.",
-          "estimated_completion_time": "2 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               0,
-          "skills":                    ["git"],
-          "links": [
-            {
-              "title":       "How to Create a GitHub Profile README",
-              "url":         "https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "Awesome GitHub Profile READMEs — Inspiration",
-              "url":         "https://github.com/abhisheknaiidu/awesome-github-profile-readme",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit your GitHub profile",
-              "url":         "https://github.com",
-              "link_type":   "submission",
-              "sub_link_type": "github",
-              "description": "Set up your GitHub profile: add a real profile picture, a bio, your location, and create a special repository named exactly your GitHub username (e.g. if your username is priyasharma, create a repo called priyasharma). Add a README.md to it that introduces who you are, what you're learning, and what you're building. Then paste your GitHub profile URL — github.com/yourusername — here.",
-              "order_index": 2
-            }
-          ]
-        },
-
-        {
-          "title":                     "Resume Writing",
-          "module_type":               "module",
-          "description":               "Write a one-page resume that gets past ATS filters and makes a recruiter want to call you.",
+          "title": "Build Your Online Presence",
+          "module_type": "module",
+          "description": "Set up your GitHub and LinkedIn so recruiters can find you.",
           "estimated_completion_time": "3 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               1,
-          "skills":                    ["resume-writing", "professional-writing"],
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": [
+            "git",
+            "linkedin"
+          ],
           "links": [
             {
-              "title":       "Writing a Developer Resume — freeCodeCamp",
-              "url":         "https://www.freecodecamp.org/news/writing-a-killer-software-engineering-resume-b11c91ef699d/",
-              "link_type":   "resources",
+              "title": "How to Write a Great GitHub README",
+              "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes",
+              "link_type": "resources",
               "order_index": 0
             },
             {
-              "title":       "Jake's Resume Template — Overleaf",
-              "url":         "https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs",
-              "link_type":   "resources",
+              "title": "How to Optimise Your LinkedIn Profile",
+              "url": "https://www.linkedin.com/help/linkedin/answer/a554351",
+              "link_type": "resources",
               "order_index": 1
             },
             {
-              "title":       "ATS Resume Checker — Jobscan",
-              "url":         "https://www.jobscan.co",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your resume as a Google Drive PDF",
-              "url":         "https://drive.google.com",
-              "link_type":   "submission",
-              "sub_link_type": "google_drive",
-              "description": "Create your resume using Google Docs, Overleaf, or Canva. Export or download it as a PDF. Upload the PDF to Google Drive, right-click it → Share → change access to 'Anyone with the link can view', and copy the shareable link. Make sure it opens without needing to sign in. Paste the link here.",
-              "order_index": 3
-            }
-          ]
-        },
-
-        {
-          "title":                     "LinkedIn Profile Setup",
-          "module_type":               "module",
-          "description":               "Build a LinkedIn presence that makes recruiters come to you.",
-          "estimated_completion_time": "2 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               2,
-          "skills":                    ["linkedin", "communication"],
-          "links": [
-            {
-              "title":       "How to Build a Strong LinkedIn Profile",
-              "url":         "https://www.linkedin.com/help/linkedin/answer/a554351",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "LinkedIn for Students — Official Guide",
-              "url":         "https://university.linkedin.com/linkedin-for-students",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit your LinkedIn profile URL",
-              "url":         "https://linkedin.com",
-              "link_type":   "submission",
-              "sub_link_type": "other",
-              "description": "Complete your LinkedIn profile before submitting: add a professional photo, a headline (e.g. 'CS Student | Python & FastAPI | Building backend projects'), an About section of at least 3 sentences, your education, and at least 5 skills. Then go to your LinkedIn profile in a browser, copy the URL from the address bar — it looks like linkedin.com/in/yourname — and paste it here.",
+              "title": "Submit your GitHub profile link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
               "order_index": 2
             }
           ]
         },
-
         {
-          "title":                     "Interview Preparation",
-          "module_type":               "module",
-          "description":               "Crack technical and HR interviews. Understand what interviewers actually look for.",
+          "title": "Python Fundamentals",
+          "module_type": "module",
+          "description": "Core Python you actually need for backend work.",
+          "estimated_completion_time": "2 weeks",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": [
+            "python",
+            "problem-solving"
+          ],
+          "links": [
+            {
+              "title": "Python Official Tutorial",
+              "url": "https://docs.python.org/3/tutorial/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Python Exercises — w3resource",
+              "url": "https://www.w3resource.com/python-exercises/",
+              "link_type": "resources",
+              "order_index": 1
+            },
+            {
+              "title": "Submit your Python project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "title": "SQL Basics",
+          "module_type": "module",
+          "description": "Write real queries, understand joins, and stop being afraid of databases.",
           "estimated_completion_time": "1 week",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               3,
-          "skills":                    ["interview-skills", "communication", "problem-solving"],
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": [
+            "sql",
+            "problem-solving"
+          ],
           "links": [
             {
-              "title":       "Tech Interview Handbook",
-              "url":         "https://www.techinterviewhandbook.org",
-              "link_type":   "resources",
+              "title": "SQLBolt — Interactive SQL Tutorial",
+              "url": "https://sqlbolt.com",
+              "link_type": "resources",
               "order_index": 0
             },
             {
-              "title":       "Common HR Interview Questions — IndiaBix",
-              "url":         "https://www.indiabix.com/hr-interview/questions-and-answers/",
-              "link_type":   "resources",
+              "title": "PostgreSQL Tutorial",
+              "url": "https://www.postgresqltutorial.com",
+              "link_type": "resources",
               "order_index": 1
             },
             {
-              "title":       "STAR Method for Behavioral Questions",
-              "url":         "https://www.indeed.com/career-advice/interviewing/how-to-use-the-star-interview-response-technique",
-              "link_type":   "resources",
+              "title": "Submit your SQL demo project",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
               "order_index": 2
-            },
-            {
-              "title":       "Submit a mock interview recording",
-              "url":         "https://youtube.com",
-              "link_type":   "submission",
-              "sub_link_type": "youtube",
-              "description": "Record yourself answering 3 interview questions out loud on camera — one technical (e.g. explain what a REST API is or how Python handles memory), one behavioural (e.g. tell me about a challenge you faced), and one HR (e.g. why do you want to work in tech?). Aim for 4–6 minutes total. No editing needed — genuine and clear is better than polished. Use Loom (loom.com) for easy recording. Upload to YouTube as unlisted and paste the URL here.",
-              "order_index": 3
             }
           ]
         },
-
         {
-          "title":                     "Job Application Strategy",
-          "module_type":               "lesson",
-          "description":               "Apply smarter, not more. Learn where to find real jobs, how to write cold emails, and how to follow up.",
-          "estimated_completion_time": "2 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               4,
-          "skills":                    ["networking", "email-writing", "communication"],
+          "title": "Build a Portfolio Project",
+          "module_type": "project",
+          "description": "Ship something real. Build a small full-stack or scripting project and document it properly.",
+          "estimated_completion_time": "2 weeks",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": [
+            "python",
+            "git"
+          ],
           "links": [
             {
-              "title":       "How to Get Your First Developer Job — freeCodeCamp",
-              "url":         "https://www.freecodecamp.org/news/how-to-get-your-first-developer-job/",
-              "link_type":   "resources",
+              "title": "How to Document Your Projects for Recruiters",
+              "url": "https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/",
+              "link_type": "resources",
               "order_index": 0
             },
             {
-              "title":       "Cold Email Templates for Job Seekers",
-              "url":         "https://hunter.io/blog/cold-email-templates/",
-              "link_type":   "resources",
+              "title": "Submit your project repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
               "order_index": 1
             },
             {
-              "title":       "Submit your job application tracker",
-              "url":         "https://drive.google.com",
-              "link_type":   "submission",
-              "sub_link_type": "google_drive",
-              "description": "Create a Google Sheet to track your job applications. Columns: Company, Role, Date Applied, How You Applied (portal/cold email/referral), Contact Name, Status, and Notes. Add at least 10 real companies you want to apply to — research each one and add a note on why it interests you. Go to File → Share → Anyone with the link can view, and paste the shareable link here.",
+              "title": "Submit a 2-minute demo video",
+              "url": "https://youtube.com",
+              "link_type": "submission",
+              "sub_link_type": "youtube",
               "order_index": 2
             }
           ]
         }
       ]
     },
-
     {
-      "title":                     "Soft Skills & Professional Growth",
-      "module_type":               "path",
-      "description":               "The skills that determine how far you go once you get the job — communication, clarity, and professionalism.",
+      "title": "Learn Python Programming",
+      "module_type": "path",
+      "description": "Master Python from basics to object-oriented programming.",
       "estimated_completion_time": "4 weeks",
-      "created_by":                "admin@risetogether.in",
-      "order_index":               3,
+      "created_by": "admin@risetogether.in",
+      "order_index": 1,
       "children": [
         {
-          "title":                     "Professional Email Writing",
-          "module_type":               "lesson",
-          "description":               "Write emails that get read and get responses. The single most used professional skill.",
-          "estimated_completion_time": "2 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               0,
-          "skills":                    ["email-writing", "professional-writing", "communication"],
+          "title": "Python Introduction & Setup",
+          "module_type": "lesson",
+          "description": "Set up your Python local development environment and run print statements.",
+          "estimated_completion_time": "1 day",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": ["python"],
           "links": [
             {
-              "title":       "How to Write Professional Emails — Grammarly",
-              "url":         "https://www.grammarly.com/blog/professional-email/",
-              "link_type":   "resources",
+              "title": "Python Installation Guide",
+              "url": "https://realpython.com/installing-python/",
+              "link_type": "resources",
               "order_index": 0
-            },
-            {
-              "title":       "Email Etiquette Rules Every Professional Should Know",
-              "url":         "https://www.businessinsider.com/email-etiquette-rules-every-professional-needs-to-know-2016-1",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit your email writing samples",
-              "url":         "https://drive.google.com",
-              "link_type":   "submission",
-              "sub_link_type": "google_drive",
-              "description": "Write 3 professional emails in a Google Doc: (1) a cold email to someone at a company you admire asking for a 15-minute call to learn about their work, (2) a follow-up email after applying for a job and hearing nothing for a week, (3) a thank-you email after a technical interview. Each email should have a subject line. Share the doc with 'Anyone with the link can view' and paste the link here.",
-              "order_index": 2
             }
           ]
         },
-
         {
-          "title":                     "Communication Skills for Developers",
-          "module_type":               "module",
-          "description":               "Explain technical ideas clearly, ask good questions, and communicate well in teams.",
-          "estimated_completion_time": "1 week",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               1,
-          "skills":                    ["communication", "teamwork"],
+          "title": "Variables, Loops & Conditionals",
+          "module_type": "module",
+          "description": "Learn conditionals and repeat tasks using for and while loops.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": ["python"],
           "links": [
             {
-              "title":       "How to Explain Technical Concepts Simply — freeCodeCamp",
-              "url":         "https://www.freecodecamp.org/news/how-to-explain-technical-concepts-to-non-technical-people/",
-              "link_type":   "resources",
+              "title": "Python Control Flow",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html",
+              "link_type": "resources",
               "order_index": 0
             },
             {
-              "title":       "Active Listening Skills — MindTools",
-              "url":         "https://www.mindtools.com/az4wxv7/active-listening",
-              "link_type":   "resources",
+              "title": "Submit loops exercises script",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
               "order_index": 1
-            },
-            {
-              "title":       "Submit a plain-language technical explanation video",
-              "url":         "https://youtube.com",
-              "link_type":   "submission",
-              "sub_link_type": "youtube",
-              "description": "Record a 2–3 minute video where you explain one technical concept to someone who has never coded — for example: what is a database, how does the internet work, or what is an API. Speak directly to camera. No slides needed — just clear, friendly explanation. Use Loom (loom.com) for easy no-edit recording. Upload to YouTube as unlisted and paste the URL here.",
-              "order_index": 2
             }
           ]
         },
-
         {
-          "title":                     "Public Speaking & Presentations",
-          "module_type":               "module",
-          "description":               "Present your ideas confidently — in interviews, team standups, and project demos.",
-          "estimated_completion_time": "1 week",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               2,
-          "skills":                    ["public-speaking", "communication"],
-          "links": [
-            {
-              "title":       "TED Talk — How to Speak so People Want to Listen",
-              "url":         "https://www.ted.com/talks/julian_treasure_how_to_speak_so_that_people_want_to_listen",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "How to Give a Killer Presentation — HBR",
-              "url":         "https://hbr.org/2013/06/how-to-give-a-killer-presentation",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit your presentation slides",
-              "url":         "https://drive.google.com",
-              "link_type":   "submission",
-              "sub_link_type": "google_drive",
-              "description": "Create a 5–8 slide presentation in Google Slides on any technical topic you have learned (e.g. what is Git and why it matters, how Python works, what is an API). Keep slides visual — one idea per slide, large text, minimal bullet points. Go to File → Share → Anyone with the link can view, and paste the shareable link here.",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit a recorded presentation",
-              "url":         "https://youtube.com",
-              "link_type":   "submission",
-              "sub_link_type": "youtube",
-              "description": "Record yourself presenting your slides from the previous submission. Aim for 3–5 minutes. Use Loom (loom.com) — it records your screen and face at the same time with one click, no editing needed. Upload to YouTube as unlisted and paste the URL here.",
-              "order_index": 3
-            }
-          ]
-        },
-
-        {
-          "title":                     "Critical Thinking & Problem Solving",
-          "module_type":               "module",
-          "description":               "Develop the habit of breaking down hard problems, identifying root causes, and making reasoned decisions.",
-          "estimated_completion_time": "1 week",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               3,
-          "skills":                    ["critical-thinking", "problem-solving"],
-          "links": [
-            {
-              "title":       "Mental Models for Problem Solving — FS Blog",
-              "url":         "https://fs.blog/mental-models/",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "First Principles Thinking — James Clear",
-              "url":         "https://jamesclear.com/first-principles",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit a structured problem breakdown",
-              "url":         "https://drive.google.com",
-              "link_type":   "submission",
-              "sub_link_type": "google_drive",
-              "description": "In a Google Doc, pick one real problem from your college or community — for example: students can't find internship opportunities, attendance registers are done on paper and get lost, or the library has no online search. Write: (1) a clear one-sentence problem statement, (2) who is affected and how, (3) the root causes (not just symptoms), and (4) three possible solutions with pros and cons of each. Aim for 400–600 words. Share with 'Anyone with the link can view' and paste the link here.",
-              "order_index": 2
-            }
-          ]
-        },
-
-        {
-          "title":                     "Time Management & Productivity",
-          "module_type":               "lesson",
-          "description":               "Do deep work, manage distractions, and build the habits that let you ship consistently.",
-          "estimated_completion_time": "2 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               4,
-          "skills":                    ["time-management"],
-          "links": [
-            {
-              "title":       "The Pomodoro Technique — Todoist",
-              "url":         "https://todoist.com/productivity-methods/pomodoro-technique",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "Atomic Habits Key Ideas — James Clear",
-              "url":         "https://jamesclear.com/atomic-habits",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Deep Work Summary — Samuel Davies",
-              "url":         "https://www.samuelthomasdavies.com/book-summaries/business/deep-work/",
-              "link_type":   "resources",
-              "order_index": 2
-            },
-            {
-              "title":       "Submit your 4-week study plan",
-              "url":         "https://drive.google.com",
-              "link_type":   "submission",
-              "sub_link_type": "google_drive",
-              "description": "Create a Google Sheet with your study plan for the next 4 weeks. Structure it by day, with columns: Date, What I'll Study, Time Block (e.g. 6pm–8pm), Goal for the Session, and Did I Complete It (fill this in daily). Be realistic — plan around your college schedule. Share with 'Anyone with the link can view' and paste the link here.",
-              "order_index": 3
-            }
-          ]
-        },
-
-        {
-          "title":                     "Teamwork & Collaboration",
-          "module_type":               "lesson",
-          "description":               "Work well with others, handle disagreements professionally, and contribute meaningfully to a team.",
-          "estimated_completion_time": "2 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               5,
-          "skills":                    ["teamwork", "communication"],
-          "links": [
-            {
-              "title":       "Google's Project Aristotle — What Makes a Great Team",
-              "url":         "https://rework.withgoogle.com/guides/understanding-team-effectiveness/steps/introduction/",
-              "link_type":   "resources",
-              "order_index": 0
-            },
-            {
-              "title":       "How to Give and Receive Feedback — Radical Candor",
-              "url":         "https://www.radicalcandor.com/blog/giving-receiving-feedback/",
-              "link_type":   "resources",
-              "order_index": 1
-            },
-            {
-              "title":       "Submit a teamwork reflection",
-              "url":         "https://drive.google.com",
-              "link_type":   "submission",
-              "sub_link_type": "google_drive",
-              "description": "Write a 300–500 word reflection in a Google Doc about a time you worked in a team — in a college project, an event, a competition, or anywhere. Cover: what the goal was, what role you played, what went well, what was hard, one thing someone else did that helped the team, and what you would do differently. Share with 'Anyone with the link can view' and paste the link here.",
-              "order_index": 2
-            }
-          ]
-        },
-
-        {
-          "title":                     "Networking & Building Connections",
-          "module_type":               "module",
-          "description":               "Get comfortable reaching out to people in tech, building genuine connections, and asking for opportunities.",
+          "title": "Python Functions & Scope",
+          "module_type": "module",
+          "description": "Write reusable code blocks using functions and understand variables scope.",
           "estimated_completion_time": "3 days",
-          "created_by":                "admin@risetogether.in",
-          "order_index":               6,
-          "skills":                    ["networking", "communication", "linkedin"],
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": ["python", "problem-solving"],
           "links": [
             {
-              "title":       "How to Network When You Hate Networking — HBR",
-              "url":         "https://hbr.org/2016/05/how-to-network-when-you-hate-networking",
-              "link_type":   "resources",
+              "title": "Defining Python Functions",
+              "url": "https://realpython.com/defining-your-own-python-function/",
+              "link_type": "resources",
               "order_index": 0
             },
             {
-              "title":       "How to Cold Message on LinkedIn Without Being Annoying",
-              "url":         "https://www.linkedin.com/business/talent/blog/talent-acquisition/tips-for-sending-linkedin-inmail",
-              "link_type":   "resources",
+              "title": "Submit functions assignment repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
               "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Python Lists, Dicts & Tuples",
+          "module_type": "module",
+          "description": "Store and manipulate collections of data using Python data structures.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": ["python"],
+          "links": [
+            {
+              "title": "Python Data Structures Tutorial",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html",
+              "link_type": "resources",
+              "order_index": 0
             },
             {
-              "title":       "Submit a link to your LinkedIn post",
-              "url":         "https://linkedin.com",
-              "link_type":   "submission",
-              "sub_link_type": "other",
-              "description": "Write and publish a post on LinkedIn about something real from your learning journey — a project you completed, a concept that finally clicked, a challenge you overcame, or something you built. Keep it genuine and 100–200 words. After posting, click the three dots (…) on your post → Copy link to post, and paste that link here. Do not paste your profile URL — paste the specific post URL.",
-              "order_index": 2
+              "title": "Submit list/dict manipulation script",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Object-Oriented Python",
+          "module_type": "module",
+          "description": "Understand classes, objects, and inheritance to model real-world problems.",
+          "estimated_completion_time": "5 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 4,
+          "skills": ["python"],
+          "links": [
+            {
+              "title": "Python OOP Basics",
+              "url": "https://realpython.com/python3-object-oriented-programming/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a simple OOP inventory project link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "File Handling & Exceptions",
+          "module_type": "module",
+          "description": "Read/write files safely using context managers and handle runtime exceptions.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 5,
+          "skills": ["python"],
+          "links": [
+            {
+              "title": "Read & Write Files in Python",
+              "url": "https://realpython.com/read-write-files-python/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit text parser script code",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Final Python Console Project",
+          "module_type": "project",
+          "description": "Create a fully functional command-line app (like a Task Manager) from scratch.",
+          "estimated_completion_time": "5 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 6,
+          "skills": ["python", "problem-solving"],
+          "links": [
+            {
+              "title": "Submit console application repository",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Learn HTML & CSS (Web Design)",
+      "module_type": "path",
+      "description": "Build layout structures and style responsive web pages.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 2,
+      "children": [
+        {
+          "title": "HTML5 Structure & Tags",
+          "module_type": "lesson",
+          "description": "Learn semantic elements (header, footer, nav, article) and forms in HTML.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": ["html-css"],
+          "links": [
+            {
+              "title": "HTML Introduction — MDN",
+              "url": "https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML",
+              "link_type": "resources",
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "title": "CSS Selectors & Typography",
+          "module_type": "lesson",
+          "description": "Master class, ID, attribute selectors, and styling text elements.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": ["html-css"],
+          "links": [
+            {
+              "title": "CSS Basics Guide — MDN",
+              "url": "https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps",
+              "link_type": "resources",
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "title": "CSS Box Model & Flexbox",
+          "module_type": "module",
+          "description": "Understand margin, padding, border, and build dynamic layouts using Flexbox.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": ["html-css"],
+          "links": [
+            {
+              "title": "Flexbox Froggy Game",
+              "url": "https://flexboxfroggy.com",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a Flexbox dashboard card layout link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "CSS Grid Layout",
+          "module_type": "module",
+          "description": "Master two-dimensional grid layouts, grid templates, alignments.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": ["html-css"],
+          "links": [
+            {
+              "title": "Grid Garden Game",
+              "url": "https://cssgridgarden.com",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a photo grid gallery repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Responsive Design & Media Queries",
+          "module_type": "module",
+          "description": "Use media queries to optimize websites for mobile, tablet, and desktop viewports.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 4,
+          "skills": ["html-css"],
+          "links": [
+            {
+              "title": "Responsive Web Design Basics",
+              "url": "https://web.dev/responsive-web-design-basics/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a responsive navbar webpage code link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "CSS Frameworks (Tailwind CSS)",
+          "module_type": "module",
+          "description": "Speed up styling using utility-first classes of Tailwind CSS.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 5,
+          "skills": ["html-css", "tailwind"],
+          "links": [
+            {
+              "title": "Tailwind CSS Documentation",
+              "url": "https://tailwindcss.com/docs/installation",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit landing page built with Tailwind CSS",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Build a Responsive Landing Page",
+          "module_type": "project",
+          "description": "Construct a responsive corporate landing page using clean HTML and styling.",
+          "estimated_completion_time": "5 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 6,
+          "skills": ["html-css", "tailwind"],
+          "links": [
+            {
+              "title": "Submit your landing page repository link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Learn JavaScript Fundamentals",
+      "module_type": "path",
+      "description": "Program interactive web pages using modern JavaScript syntax.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 3,
+      "children": [
+        {
+          "title": "JS Variables & Data Types",
+          "module_type": "lesson",
+          "description": "Learn let, const, strings, numbers, booleans, and null/undefined values in JS.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": ["javascript"],
+          "links": [
+            {
+              "title": "JavaScript First Steps — MDN",
+              "url": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps",
+              "link_type": "resources",
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "title": "JS Functions & Arrays",
+          "module_type": "module",
+          "description": "Write arrow functions and manipulate arrays using map, filter, and reduce.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": ["javascript", "problem-solving"],
+          "links": [
+            {
+              "title": "JS Functions Guide",
+              "url": "https://javascript.info/function-basics",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit arrays manipulation exercises code",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "DOM Selection & Manipulation",
+          "module_type": "module",
+          "description": "Select elements using querySelector and update content/classes dynamically.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": ["javascript"],
+          "links": [
+            {
+              "title": "DOM Manipulation Basics",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit background color-flipper repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "JS Event Listeners",
+          "module_type": "module",
+          "description": "Listen to clicks, keyboard events, and forms submit events to handle interactivity.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": ["javascript"],
+          "links": [
+            {
+              "title": "Introduction to JS Events",
+              "url": "https://javascript.info/introduction-browser-events",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit interactive form validation repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Fetching APIs & JSON",
+          "module_type": "module",
+          "description": "Understand AJAX, requests/responses structure, and consume third-party API data using fetch.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 4,
+          "skills": ["javascript"],
+          "links": [
+            {
+              "title": "Fetch API guide",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit quotes generator using public API link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Async/Await & Promises",
+          "module_type": "module",
+          "description": "Handle asynchronous operations cleaner using JS Promises and async/await syntax.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 5,
+          "skills": ["javascript", "problem-solving"],
+          "links": [
+            {
+              "title": "JS Async / Await",
+              "url": "https://javascript.info/async-await",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit async API data loader repo link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Build an Interactive Todo List",
+          "module_type": "project",
+          "description": "Build an interactive todo app with local storage integration to preserve tasks.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 6,
+          "skills": ["javascript"],
+          "links": [
+            {
+              "title": "Submit interactive todo app repo link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "MERN Stack Backend (Node, Express, MongoDB)",
+      "module_type": "path",
+      "description": "Construct scalable APIs using Node.js, Express, and MongoDB databases.",
+      "estimated_completion_time": "4 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 4,
+      "children": [
+        {
+          "title": "Node.js Basics & NPM",
+          "module_type": "lesson",
+          "description": "Understand V8 engine, import/export modules, install packages using NPM.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": ["node-express"],
+          "links": [
+            {
+              "title": "Node.js Introductory Guide",
+              "url": "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs",
+              "link_type": "resources",
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "title": "Express.js Server Setup",
+          "module_type": "module",
+          "description": "Initialize a server, configure basic routing, and handle requests/responses in Express.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": ["node-express"],
+          "links": [
+            {
+              "title": "Express Hello World Guide",
+              "url": "https://expressjs.com/en/starter/hello-world.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit basic Express app folder link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Creating REST Endpoints",
+          "module_type": "module",
+          "description": "Implement CRUD actions using GET, POST, PUT, DELETE Express request handlers.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": ["node-express"],
+          "links": [
+            {
+              "title": "Express Routing Guide",
+              "url": "https://expressjs.com/en/guide/routing.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit product API endpoints repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Introduction to MongoDB",
+          "module_type": "module",
+          "description": "Understand NoSQL document-based data storing and construct databases on Mongo Atlas.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": ["mongodb"],
+          "links": [
+            {
+              "title": "MongoDB Getting Started",
+              "url": "https://www.mongodb.com/docs/manual/tutorial/getting-started/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit connection string screenshot URL",
+              "url": "https://drive.google.com",
+              "link_type": "submission",
+              "sub_link_type": "google_drive",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Mongoose Models & Schemas",
+          "module_type": "module",
+          "description": "Define data structures and model behaviors in your database using Mongoose ODM.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 4,
+          "skills": ["mongodb", "node-express"],
+          "links": [
+            {
+              "title": "Mongoose Guide",
+              "url": "https://mongoosejs.com/docs/guide.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit Mongoose schemas script link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "JWT Authentication in Express",
+          "module_type": "module",
+          "description": "Secure API routes using bcrypt password hashing and JSON Web Tokens.",
+          "estimated_completion_time": "5 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 5,
+          "skills": ["node-express", "problem-solving"],
+          "links": [
+            {
+              "title": "JWT Authentication Guide",
+              "url": "https://web.dev/jwt-auth/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit signin/signup API code link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Build a MERN Backend Project",
+          "module_type": "project",
+          "description": "Build and document a full CRUD Task Management API using Mongoose, Express, and JWT.",
+          "estimated_completion_time": "6 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 6,
+          "skills": ["node-express", "mongodb"],
+          "links": [
+            {
+              "title": "Submit final backend repository link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "MERN Stack Frontend (React)",
+      "module_type": "path",
+      "description": "Build interactive single-page user interfaces using React.",
+      "estimated_completion_time": "4 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 5,
+      "children": [
+        {
+          "title": "React JSX & Components",
+          "module_type": "lesson",
+          "description": "Learn custom components, rendering structures, and passing data using properties.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": ["react"],
+          "links": [
+            {
+              "title": "Your First Component — React Docs",
+              "url": "https://react.dev/learn/your-first-component",
+              "link_type": "resources",
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "title": "React State (useState Hook)",
+          "module_type": "module",
+          "description": "Use useState hook to remember component values and trigger UI updates.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": ["react"],
+          "links": [
+            {
+              "title": "React State Docs",
+              "url": "https://react.dev/learn/state-a-components-memory",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit React interactive clicker repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "React Side Effects (useEffect Hook)",
+          "module_type": "module",
+          "description": "Fetch remote endpoints data and clean up events using useEffect Hook.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": ["react"],
+          "links": [
+            {
+              "title": "Synchronizing with Effects",
+              "url": "https://react.dev/learn/synchronizing-with-effects",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a React weather card fetching APIs",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Fetching Backend APIs in React",
+          "module_type": "module",
+          "description": "Connect React application to Express backend using Axios client queries.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": ["react", "node-express"],
+          "links": [
+            {
+              "title": "Axios Introduction Guide",
+              "url": "https://axios-http.com/docs/intro",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit connected React-Express repo link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "React Routing (React Router)",
+          "module_type": "module",
+          "description": "Configure multi-page client-side paths using React Router components.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 4,
+          "skills": ["react"],
+          "links": [
+            {
+              "title": "React Router Quick Start",
+              "url": "https://reactrouter.com/en/main/start/tutorial",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit routes navigation repo code",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Context API for Global State",
+          "module_type": "module",
+          "description": "Avoid prop drilling. Share global theme values or auth state using Context.",
+          "estimated_completion_time": "3 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 5,
+          "skills": ["react"],
+          "links": [
+            {
+              "title": "React Context Guide",
+              "url": "https://react.dev/learn/passing-data-deeply-with-context",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit global auth-provider code link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Connecting React to Express",
+          "module_type": "project",
+          "description": "Consolidate MERN stack skills to build, deploy, and demo a fully linked application.",
+          "estimated_completion_time": "6 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 6,
+          "skills": ["react", "node-express", "mongodb"],
+          "links": [
+            {
+              "title": "Submit MERN application code repository link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Learn Java Programming",
+      "module_type": "path",
+      "description": "Get started with Java, Object-Oriented Principles, and core libraries.",
+      "estimated_completion_time": "3 weeks",
+      "created_by": "admin@risetogether.in",
+      "order_index": 6,
+      "children": [
+        {
+          "title": "Java Syntax & JVM Setup",
+          "module_type": "lesson",
+          "description": "Install JDK, set environmental paths, compile and run basic Java files.",
+          "estimated_completion_time": "2 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 0,
+          "skills": ["java"],
+          "links": [
+            {
+              "title": "Java Getting Started Tutorial",
+              "url": "https://www.w3schools.com/java/java_getstarted.asp",
+              "link_type": "resources",
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "title": "Java Classes & Objects",
+          "module_type": "module",
+          "description": "Model custom objects using variables, constructors, methods, and getters/setters.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 1,
+          "skills": ["java"],
+          "links": [
+            {
+              "title": "Java Classes and Objects Guide",
+              "url": "https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit a simple student class file repo",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Inheritance & Interfaces",
+          "module_type": "module",
+          "description": "Re-use logic through parent/child inheritance and implement custom Java interfaces.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 2,
+          "skills": ["java", "problem-solving"],
+          "links": [
+            {
+              "title": "Java Interfaces Tutorial",
+              "url": "https://www.w3schools.com/java/java_interface.asp",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit shape-calculation classes repo link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "title": "Java Collections Framework",
+          "module_type": "module",
+          "description": "Store and search lists, sets, and maps using Java Collections.",
+          "estimated_completion_time": "4 days",
+          "created_by": "admin@risetogether.in",
+          "order_index": 3,
+          "skills": ["java"],
+          "links": [
+            {
+              "title": "Java Collections Introduction",
+              "url": "https://www.geeksforgeeks.org/collections-in-java-2/",
+              "link_type": "resources",
+              "order_index": 0
+            },
+            {
+              "title": "Submit task list collection program link",
+              "url": "https://github.com",
+              "link_type": "submission",
+              "sub_link_type": "github",
+              "order_index": 1
             }
           ]
         }
