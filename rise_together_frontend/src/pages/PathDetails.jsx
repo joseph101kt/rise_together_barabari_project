@@ -13,6 +13,16 @@ const PathDetails = () => {
   const { id } = useParams();
   const [pathData, setPathData] = useState(null);
   const [userProgress, setUserProgress] = useState(null);
+  const [allUserProgress, setAllUserProgress] = useState([]);
+  const [alertDialog, setAlertDialog] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+  });
+
+  const showAlert = (title, message) => {
+    setAlertDialog({ isOpen: true, title, message });
+  };
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [enrolling, setEnrolling] = useState(false);
@@ -30,7 +40,7 @@ const PathDetails = () => {
       setLoading(true);
       setError("");
       try {
-        const [pathRes, progressRes] = await Promise.all([
+        const [pathRes, progressRes, allProgressRes] = await Promise.all([
           API.get(`/modules/${id}`),
           API.get(`/user_modules/${id}`).catch((err) => {
             // Silence 404 (indicating the user is not enrolled in this path yet)
@@ -39,9 +49,11 @@ const PathDetails = () => {
             }
             throw err;
           }),
+          API.get("/user_modules"),
         ]);
         setPathData(pathRes.data);
         setUserProgress(progressRes.data);
+        setAllUserProgress(allProgressRes.data || []);
       } catch (err) {
         setError(err.response?.data?.detail || "Failed to load learning path details.");
       } finally {
@@ -52,7 +64,25 @@ const PathDetails = () => {
     fetchPathDetailsAndProgress();
   }, [id]);
 
-  // Calculate task counts and progress
+  // Calculate all submitted links across all enrolled modules
+  const allSubmittedLinks = useMemo(() => {
+    if (!allUserProgress) return [];
+    return allUserProgress.flatMap((um) => um.submitted_links || []);
+  }, [allUserProgress]);
+
+  // Collect all link IDs that belong to the child modules of the current pathway
+  const currentPathLinkIds = useMemo(() => {
+    if (!pathData) return new Set();
+    const ids = new Set();
+    pathData.children?.forEach((child) => {
+      child.links?.forEach((lnk) => {
+        ids.add(lnk.module_link_id);
+      });
+    });
+    return ids;
+  }, [pathData]);
+
+  // Calculate task counts and progress specific to this pathway
   const totalLinks = useMemo(() => {
     if (!pathData) return 0;
     let count = 0;
@@ -63,9 +93,10 @@ const PathDetails = () => {
   }, [pathData]);
 
   const completedLinks = useMemo(() => {
-    if (!userProgress || !userProgress.submitted_links) return 0;
-    return userProgress.submitted_links.filter((sl) => sl.completed).length;
-  }, [userProgress]);
+    return allSubmittedLinks.filter(
+      (sl) => sl.completed && currentPathLinkIds.has(sl.module_link_id)
+    ).length;
+  }, [allSubmittedLinks, currentPathLinkIds]);
 
   const progressPercent = totalLinks > 0 ? Math.round((completedLinks / totalLinks) * 100) : 0;
 
@@ -76,8 +107,11 @@ const PathDetails = () => {
         module_id: Number(id),
       });
       setUserProgress(res.data);
+      // Re-fetch all progress to keep states synced
+      const refreshRes = await API.get("/user_modules");
+      setAllUserProgress(refreshRes.data || []);
     } catch (err) {
-      alert(err.response?.data?.detail || "Failed to start studying. Please try again.");
+      showAlert("Start Studying", err.response?.data?.detail || "Failed to start studying. Please try again.");
     } finally {
       setEnrolling(false);
     }
@@ -87,35 +121,53 @@ const PathDetails = () => {
   const handleToggleLink = async (resource, isCurrentlyCompleted) => {
     if (!userProgress) return;
     const moduleLinkId = resource.module_link_id;
+    const childModuleId = resource.child_module_id;
 
-    const existing = userProgress.submitted_links?.find(
-      (sl) => sl.module_link_id === moduleLinkId
-    );
+    // Check if the user is enrolled in the child module
+    const isEnrolledInChild = allUserProgress.some((um) => um.module_id === childModuleId);
 
     try {
+      if (!isEnrolledInChild) {
+        // Enroll in the child module first
+        const enrollRes = await API.post("/user_modules", {
+          module_id: childModuleId,
+        });
+        setAllUserProgress((prev) => [...prev, enrollRes.data]);
+      }
+
+      const existing = allSubmittedLinks.find(
+        (sl) => sl.module_link_id === moduleLinkId
+      );
+
       if (!existing) {
         // Create link progress entry first
-        await API.post(`/user_modules/${id}/links`, {
+        await API.post(`/user_modules/${childModuleId}/links`, {
           module_link_id: moduleLinkId,
           url: resource.url || "https://completed.resource",
           title: resource.title || "Completed Resource",
         });
 
         // Patch completed state to true
-        const patchRes = await API.patch(`/user_modules/${id}/links/${moduleLinkId}`, {
+        await API.patch(`/user_modules/${childModuleId}/links/${moduleLinkId}`, {
           completed: true,
         });
-        setUserProgress(patchRes.data);
       } else {
         // Toggle existing record
-        const patchRes = await API.patch(`/user_modules/${id}/links/${moduleLinkId}`, {
+        await API.patch(`/user_modules/${childModuleId}/links/${moduleLinkId}`, {
           completed: !isCurrentlyCompleted,
         });
-        setUserProgress(patchRes.data);
       }
+
+      // Re-fetch progress to update the UI
+      const refreshRes = await API.get("/user_modules");
+      setAllUserProgress(refreshRes.data || []);
+      
+      const parentProgressRes = await API.get(`/user_modules/${id}`);
+      setUserProgress(parentProgressRes.data);
+
     } catch (err) {
       console.error("Failed to toggle resource link:", err);
-      alert("Failed to update resource completion status.");
+      showAlert("Update Failed", "Failed to update resource completion status.");
     }
   };
 
@@ -132,28 +184,48 @@ const PathDetails = () => {
   const handleSubmitLink = async (e) => {
     e.preventDefault();
     if (!submissionUrl.trim() || !submissionTitle.trim()) {
-      alert("Please enter both a title and URL for your submission.");
+      showAlert("Required Input", "Please enter both a title and URL for your submission.");
       return;
     }
 
+    const childModuleId = activeResource.child_module_id;
+    const moduleLinkId = activeResource.module_link_id;
+
+    // Check if enrolled
+    const isEnrolledInChild = allUserProgress.some((um) => um.module_id === childModuleId);
+
     setSubmitting(true);
     try {
+      if (!isEnrolledInChild) {
+        // Enroll in child module
+        const enrollRes = await API.post("/user_modules", {
+          module_id: childModuleId,
+        });
+        setAllUserProgress((prev) => [...prev, enrollRes.data]);
+      }
+
       // Step 1: Create tracking link (default completed=false)
-      await API.post(`/user_modules/${id}/links`, {
-        module_link_id: activeResource.module_link_id,
+      await API.post(`/user_modules/${childModuleId}/links`, {
+        module_link_id: moduleLinkId,
         url: submissionUrl,
         title: submissionTitle,
       });
 
       // Step 2: Mark it complete immediately upon submission
-      const patchRes = await API.patch(`/user_modules/${id}/links/${activeResource.module_link_id}`, {
+      await API.patch(`/user_modules/${childModuleId}/links/${moduleLinkId}`, {
         completed: true,
       });
 
-      setUserProgress(patchRes.data);
+      // Re-fetch progress to update the UI
+      const refreshRes = await API.get("/user_modules");
+      setAllUserProgress(refreshRes.data || []);
+
+      const parentProgressRes = await API.get(`/user_modules/${id}`);
+      setUserProgress(parentProgressRes.data);
+
       setSubmitModalOpen(false);
     } catch (err) {
-      alert(err.response?.data?.detail || "Failed to submit assignment link.");
+      showAlert("Submission Failed", err.response?.data?.detail || "Failed to submit assignment link.");
     } finally {
       setSubmitting(false);
     }
@@ -191,45 +263,46 @@ const PathDetails = () => {
       <div className="min-h-screen bg-background text-foreground">
         {/* Hero */}
         <section
-          className="relative overflow-hidden px-6 py-16 text-white"
-          style={{ background: "var(--gradient-panel)" }}
+          className="relative overflow-hidden border-b border-border/50 px-6 py-16"
+          style={{
+            background: "linear-gradient(160deg, #e2d9ff 0%, #d4c9ff 35%, #fff3cf 100%)"
+          }}
         >
-          <div
-            className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full blur-3xl"
-            style={{
-              background: "radial-gradient(circle, #FFD230 0%, transparent 70%)",
-              opacity: 0.25,
-            }}
-          />
-          <div className="relative mx-auto max-w-6xl">
+          {/* Background glow effects */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+            <div className="absolute top-1/2 left-1/4 h-[300px] w-[300px] rounded-full bg-[#6366f1]/15 blur-[80px]" />
+            <div className="absolute top-1/2 right-1/4 h-[300px] w-[300px] rounded-full bg-[#facc15]/15 blur-[80px]" />
+          </div>
+
+          <div className="relative mx-auto max-w-6xl z-10 text-foreground">
             <Link
               to="/learning-paths"
-              className="text-sm font-semibold hover:underline"
-              style={{ color: "var(--brand-yellow)" }}
+              className="text-sm font-semibold transition-all hover:underline"
+              style={{ color: "var(--brand-indigo)" }}
             >
               ← Back to Learning Paths
             </Link>
 
-            <h1 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+            <h1 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
               {pathData.title}
             </h1>
 
-            <p className="mt-4 max-w-3xl text-white/85 leading-relaxed">
+            <p className="mt-4 max-w-3xl text-muted-foreground leading-relaxed">
               {pathData.description}
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-4">
               {pathData.estimated_completion_time && (
                 <span 
-                  className="text-sm font-semibold flex items-center gap-1.5 animate-pulse" 
-                  style={{ color: "var(--brand-yellow)" }}
+                  className="text-sm font-bold flex items-center gap-1.5" 
+                  style={{ color: "var(--brand-indigo)" }}
                 >
                   ⏱️ Estimated Time: {pathData.estimated_completion_time}
                 </span>
               )}
 
               {userProgress && (
-                <span className="rounded-full bg-white/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white backdrop-blur shadow-sm">
+                <span className="rounded-full bg-indigo-50 border border-indigo-100/80 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700 shadow-sm">
                   Status: {userProgress.status === "completed" ? "Completed" : "In Progress"}
                 </span>
               )}
@@ -237,14 +310,14 @@ const PathDetails = () => {
 
             {/* Progress Bar (Enrolled Only) */}
             {userProgress && totalLinks > 0 && (
-              <div className="mt-8 w-full max-w-md bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
-                <div className="flex items-center justify-between text-xs font-bold text-white/95 mb-2">
+              <div className="mt-8 w-full max-w-md bg-white/70 border border-border/80 rounded-2xl p-4 shadow-sm backdrop-blur-sm">
+                <div className="flex items-center justify-between text-xs font-bold text-foreground mb-2">
                   <span className="uppercase tracking-wider">Path Progress</span>
                   <span>{progressPercent}% ({completedLinks}/{totalLinks} tasks)</span>
                 </div>
-                <div className="h-2 w-full bg-white/15 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-indigo-100/50 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-[color:var(--brand-yellow)] transition-all duration-500 rounded-full"
+                    className="h-full bg-[color:var(--brand-indigo)] transition-all duration-500 rounded-full"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
@@ -256,11 +329,7 @@ const PathDetails = () => {
                 <Button
                   onClick={handleStartStudying}
                   disabled={enrolling}
-                  className="h-11 rounded-xl px-8 font-semibold shadow-md transition-all hover:scale-[1.02]"
-                  style={{
-                    background: "var(--brand-yellow)",
-                    color: "var(--brand-indigo)",
-                  }}
+                  className="h-11 rounded-xl px-8 font-semibold shadow-md transition-all hover:scale-[1.02] bg-[color:var(--brand-indigo)] text-white hover:opacity-95"
                 >
                   {enrolling ? "Enrolling..." : "Start Studying"}
                 </Button>
@@ -276,9 +345,9 @@ const PathDetails = () => {
               <ModuleSection
                 key={module.id}
                 module={module}
-                resources={module.links || []}
+                resources={(module.links || []).map((link) => ({ ...link, child_module_id: module.id }))}
                 enrolled={!!userProgress}
-                submittedLinks={userProgress?.submitted_links || []}
+                submittedLinks={allSubmittedLinks.filter((sl) => currentPathLinkIds.has(sl.module_link_id))}
                 onToggleLink={handleToggleLink}
                 onOpenSubmitModal={openSubmissionModal}
               />
@@ -289,6 +358,7 @@ const PathDetails = () => {
             </div>
           )}
         </section>
+
       </div>
 
       {/* Assignment Submission Modal (Reusable generic modal) */}
@@ -370,6 +440,27 @@ const PathDetails = () => {
           </div>
         </form>
       </Modal>
+
+      {/* Custom Alert Modal */}
+      <Modal
+        isOpen={alertDialog.isOpen}
+        onClose={() => setAlertDialog((prev) => ({ ...prev, isOpen: false }))}
+        title={alertDialog.title}
+        size="sm"
+      >
+        <div className="space-y-4 pt-1">
+          <p className="text-sm text-muted-foreground">{alertDialog.message}</p>
+          <div className="flex justify-end">
+            <Button
+              onClick={() => setAlertDialog((prev) => ({ ...prev, isOpen: false }))}
+              className="rounded-xl font-semibold bg-[color:var(--brand-indigo)] text-white hover:opacity-95 px-6"
+            >
+              OK
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
     </AppShell>
   );
 };

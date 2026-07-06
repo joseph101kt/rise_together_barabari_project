@@ -74,8 +74,8 @@ export function AppShell({ children }) {
 
       <main>{children}</main>
 
-      <footer className="border-t border-border/70 py-8">
-        <div className="mx-auto max-w-6xl px-6 text-xs text-muted-foreground">
+      <footer className="border-t border-border/50 bg-slate-50 py-8 mt-auto">
+        <div className="mx-auto max-w-6xl px-6 text-center text-lg font-semibold text-[color:var(--brand-indigo)]">
           Rise Together · A Barabari Collective project
         </div>
       </footer>

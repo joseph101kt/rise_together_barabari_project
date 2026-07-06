@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect, useMemo, useRef } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { 
   Briefcase, 
   GraduationCap, 
@@ -26,8 +26,66 @@ import { userService } from "../services/userService";
 const PublicProfile = () => {
   const { id } = useParams();
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   
   const [profileData, setProfileData] = useState(null);
+  const [alertDialog, setAlertDialog] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+  });
+
+  const showAlert = (title, message) => {
+    setAlertDialog({ isOpen: true, title, message });
+  };
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchedUser, setSearchedUser] = useState(null);
+  const [searching, setSearching] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setSearchedUser(null);
+      return;
+    }
+
+    const userId = Number(searchQuery.trim());
+    if (isNaN(userId)) {
+      setSearchedUser(null);
+      return;
+    }
+
+    const delayDebounce = setTimeout(async () => {
+      setSearching(true);
+      try {
+        const response = await API.get(`/users/${userId}`);
+        setSearchedUser({
+          id: response.data.user.id,
+          name: response.data.user.name,
+          headline: response.data.profile?.headline || "Learner"
+        });
+      } catch (err) {
+        setSearchedUser(null);
+      } finally {
+        setSearching(false);
+      }
+    }, 400);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -170,7 +228,7 @@ const PublicProfile = () => {
       setEditModalOpen(false);
       await fetchProfile();
     } catch (err) {
-      alert(err.response?.data?.detail || "Failed to update profile details. Please try again.");
+      showAlert("Update Error", err.response?.data?.detail || "Failed to update profile details. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -179,7 +237,7 @@ const PublicProfile = () => {
   // List builder action helpers
   const addExperienceItem = () => {
     if (!newExp.company || !newExp.role) {
-      alert("Company and Role are required fields.");
+      showAlert("Required Fields", "Company and Role are required fields.");
       return;
     }
     setFormExperience([...formExperience, { ...newExp, id: Date.now() }]);
@@ -192,7 +250,7 @@ const PublicProfile = () => {
 
   const addEducationItem = () => {
     if (!newEdu.institution) {
-      alert("Institution is a required field.");
+      showAlert("Required Field", "Institution is a required field.");
       return;
     }
     setFormEducation([...formEducation, { ...newEdu, id: Date.now() }]);
@@ -205,7 +263,7 @@ const PublicProfile = () => {
 
   const addLinkItem = () => {
     if (!newLink.title || !newLink.url) {
-      alert("Link Title and URL are required.");
+      showAlert("Required Fields", "Link Title and URL are required.");
       return;
     }
     setFormLinks([...formLinks, { ...newLink, id: Date.now() }]);
@@ -273,13 +331,70 @@ const PublicProfile = () => {
       {/* 1. Header Banner Area */}
       <div className="relative h-48 w-full bg-[var(--gradient-panel)] md:h-64">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_120%,var(--brand-yellow)_0%,transparent_50%)] opacity-30 pointer-events-none" />
-        <div className="mx-auto max-w-6xl px-6 pt-6 relative z-10">
+        <div className="mx-auto max-w-6xl px-6 pt-6 relative z-20 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <Link 
             to="/learning-paths" 
             className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--brand-indigo)] hover:opacity-80 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" /> Back to Learning Paths
           </Link>
+
+          {/* Search Bar for Other Student Profiles */}
+          <div ref={searchContainerRef} className="relative w-full sm:max-w-xs z-30">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                placeholder="Enter Student ID (e.g. 2)..."
+                className="w-full h-10 px-3.5 pl-9 rounded-xl border border-border bg-white text-slate-800 placeholder-slate-400 text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-indigo)]/50 transition-all"
+              />
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs select-none pointer-events-none">
+                🔍
+              </div>
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-semibold text-slate-400 hover:text-slate-600"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Suggestions Dropdown */}
+            {showSuggestions && searchQuery.trim() && (
+              <div className="absolute top-full left-0 right-0 mt-1.5 rounded-xl border border-border bg-card p-1.5 shadow-xl animate-in fade-in slide-in-from-top-2 duration-150 z-30">
+                {searching ? (
+                  <div className="p-3 text-center text-xs text-muted-foreground">
+                    Searching...
+                  </div>
+                ) : searchedUser ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery("");
+                      setShowSuggestions(false);
+                      navigate(`/profile/${searchedUser.id}`);
+                    }}
+                    className="w-full flex flex-col items-start gap-0.5 rounded-lg px-3 py-1.5 text-left hover:bg-secondary/85 transition-colors"
+                  >
+                    <span className="text-xs font-bold text-foreground">{searchedUser.name}</span>
+                    <span className="text-[10px] text-muted-foreground truncate">{searchedUser.headline}</span>
+                  </button>
+                ) : (
+                  <div className="p-3 text-center text-xs text-muted-foreground">
+                    No user found
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -473,13 +588,13 @@ const PublicProfile = () => {
       >
         <div className="flex flex-col md:flex-row gap-6 min-h-[50vh]">
           {/* Tab Navigation Menu */}
-          <div className="flex md:flex-col border-b md:border-b-0 md:border-r border-border pb-4 md:pb-0 md:pr-4 gap-2 text-sm shrink-0">
+          <div className="flex md:flex-col overflow-x-auto whitespace-nowrap md:whitespace-normal border-b md:border-b-0 md:border-r border-border pb-4 md:pb-0 md:pr-4 gap-2 text-sm shrink-0 scrollbar-none">
             {["general", "skills", "experience", "education", "links"].map((tab) => (
               <button
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
-                className={`text-left px-4 py-2 rounded-lg font-semibold capitalize transition-all ${
+                className={`text-left px-4 py-2 rounded-lg font-semibold capitalize transition-all shrink-0 ${
                   activeTab === tab
                     ? "bg-[color:var(--brand-indigo)] text-white"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
@@ -614,7 +729,7 @@ const PublicProfile = () => {
                     <h4 className="text-xs font-bold uppercase tracking-wider text-[color:var(--brand-indigo)] flex items-center gap-1.5">
                       <PlusCircle className="h-4 w-4" /> Add Experience Entry
                     </h4>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="company">Company</Label>
                         <Input
@@ -638,7 +753,7 @@ const PublicProfile = () => {
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="expStart">Start Date</Label>
                         <Input
@@ -674,7 +789,7 @@ const PublicProfile = () => {
                     <Button
                       type="button"
                       onClick={addExperienceItem}
-                      className="rounded-xl font-semibold bg-secondary text-foreground hover:bg-border/60 text-xs w-full py-2"
+                      className="rounded-xl font-semibold bg-[color:var(--brand-yellow)] text-black hover:bg-[color:var(--brand-yellow)] hover:opacity-90 text-xs w-full py-2"
                     >
                       Add Entry to List
                     </Button>
@@ -725,7 +840,7 @@ const PublicProfile = () => {
                         className="h-10 rounded-xl"
                       />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="degree">Degree / Certification</Label>
                         <Input
@@ -749,7 +864,7 @@ const PublicProfile = () => {
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="eduStart">Start Date</Label>
                         <Input
@@ -785,7 +900,7 @@ const PublicProfile = () => {
                     <Button
                       type="button"
                       onClick={addEducationItem}
-                      className="rounded-xl font-semibold bg-secondary text-foreground hover:bg-border/60 text-xs w-full py-2"
+                      className="rounded-xl font-semibold bg-[color:var(--brand-yellow)] text-black hover:bg-[color:var(--brand-yellow)] hover:opacity-90 text-xs w-full py-2"
                     >
                       Add Entry to List
                     </Button>
@@ -825,7 +940,7 @@ const PublicProfile = () => {
                     <h4 className="text-xs font-bold uppercase tracking-wider text-[color:var(--brand-indigo)] flex items-center gap-1.5">
                       <PlusCircle className="h-4 w-4" /> Add Profile Link
                     </h4>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="linkTitle">Link Title</Label>
                         <Input
@@ -909,6 +1024,27 @@ const PublicProfile = () => {
           </div>
         </div>
       </Modal>
+
+      {/* Custom Alert Modal */}
+      <Modal
+        isOpen={alertDialog.isOpen}
+        onClose={() => setAlertDialog((prev) => ({ ...prev, isOpen: false }))}
+        title={alertDialog.title}
+        size="sm"
+      >
+        <div className="space-y-4 pt-1">
+          <p className="text-sm text-muted-foreground">{alertDialog.message}</p>
+          <div className="flex justify-end">
+            <Button
+              onClick={() => setAlertDialog((prev) => ({ ...prev, isOpen: false }))}
+              className="rounded-xl font-semibold bg-[color:var(--brand-indigo)] text-white hover:opacity-95 px-6"
+            >
+              OK
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
       </div>
     </AppShell>
   );

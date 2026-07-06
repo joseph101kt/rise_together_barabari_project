@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
+import { CheckCircle2, AlertCircle, ExternalLink, Lock, FileUp } from "lucide-react";
 import { Button } from "./ui/button";
 
 const ResourceCard = ({
@@ -62,48 +62,63 @@ const ResourceCard = ({
             resource.link_type === "submission" ? (
               // Assignment Submission Layout
               <div className="space-y-3">
-                {submission ? (
-                  <div className="rounded-xl bg-secondary/40 border border-border p-3 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-muted-foreground uppercase">
-                        Your Submission
+                {!submission ? (
+                  <div className="rounded-xl border border-dashed border-border/80 bg-slate-50/50 p-4 text-center space-y-3">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--brand-yellow)]/10 text-[color:var(--brand-yellow)]">
+                      <FileUp className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <h5 className="text-xs font-bold text-foreground">Submit Your Work</h5>
+                      <p className="text-[11px] text-muted-foreground">
+                        Provide a URL (GitHub, Figma, etc.) to complete this module.
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => onOpenSubmitModal(resource)}
+                      size="sm"
+                      className="w-full h-9 rounded-xl font-semibold bg-[color:var(--brand-indigo)] text-white hover:opacity-95 animate-in fade-in zoom-in-95 duration-200"
+                    >
+                      Submit Assignment
+                    </Button>
+                  </div>
+                ) : (
+                  // Submitted State (Premium Design)
+                  <div className="rounded-xl border border-green-100 bg-green-50/20 p-4 space-y-3">
+                    <div className="flex items-center justify-between border-b border-green-100/40 pb-2">
+                      <span className="text-[10px] font-bold text-green-700/80 uppercase tracking-wider">
+                        Submission Sent
                       </span>
                       <span className="flex items-center gap-1 text-[10px] font-bold uppercase">
                         {isCompleted ? (
-                          <span className="text-green-600 flex items-center gap-0.5">
-                            <CheckCircle2 className="h-3.5 w-3.5" /> Approved
+                          <span className="text-green-600 flex items-center gap-1 bg-green-100/50 px-2 py-0.5 rounded-full">
+                            <CheckCircle2 className="h-3 w-3" /> Approved
                           </span>
                         ) : (
-                          <span className="text-amber-500 flex items-center gap-0.5">
-                            <AlertCircle className="h-3.5 w-3.5" /> Pending Review
+                          <span className="text-amber-600 flex items-center gap-1 bg-amber-100/50 px-2 py-0.5 rounded-full">
+                            <AlertCircle className="h-3 w-3 animate-pulse" /> Pending
                           </span>
                         )}
                       </span>
                     </div>
-                    <a
-                      href={submission.link_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-1 text-xs font-semibold text-[color:var(--brand-indigo)] hover:underline truncate"
-                    >
-                      <ExternalLink className="h-3 w-3 shrink-0" />
-                      {submission.link_title || "Submitted URL"}
-                    </a>
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-bold text-foreground truncate">
+                          {submission.link_title || "Submitted URL"}
+                        </p>
+                        <p className="text-[10px] text-muted-foreground truncate">
+                          {submission.link_url}
+                        </p>
+                      </div>
+                      <a
+                        href={submission.link_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-border/80 text-[color:var(--brand-indigo)] hover:bg-slate-50 transition-all shrink-0 shadow-sm"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
                   </div>
-                ) : (
-                  <p className="text-xs text-muted-foreground italic">
-                    Requires url submission to complete this path.
-                  </p>
-                )}
-
-                {!submission && (
-                  <Button
-                    onClick={() => onOpenSubmitModal(resource)}
-                    size="sm"
-                    className="w-full rounded-xl font-semibold bg-[color:var(--brand-indigo)] text-white hover:opacity-95"
-                  >
-                    Submit Assignment
-                  </Button>
                 )}
               </div>
             ) : (
@@ -134,17 +149,10 @@ const ResourceCard = ({
               </div>
             )
           ) : (
-            // Viewer mode (Unenrolled)
-            resource.url && (
-              <a
-                href={resource.url}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-xl bg-secondary px-4 py-2 text-xs font-bold text-foreground transition-all hover:bg-border/60 gap-1"
-              >
-                Open Resource <ExternalLink className="h-3 w-3" />
-              </a>
-            )
+            // Viewer mode (Unenrolled) - Premium Locked Layout
+            <div className="inline-flex w-full items-center justify-center rounded-xl bg-slate-50 border border-dashed border-border/80 px-4 py-2.5 text-xs font-semibold text-muted-foreground select-none gap-1.5">
+              <Lock className="h-3.5 w-3.5" /> Start studying to unlock
+            </div>
           )}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import  Logo from "../components/Logo";
+import Logo from "../components/Logo";
 import { Button } from "../components/ui/button";
 import { LogIn, ArrowRight, UserPlus } from "lucide-react";
 
@@ -132,7 +132,7 @@ const Home = () => {
                 className="rounded-xl font-semibold text-white px-8 shadow-lg transition-all hover:opacity-90 hover:shadow-xl flex items-center justify-center gap-2"
                 style={{ background: "var(--gradient-button)" }}
               >
-                 Create your account  <UserPlus className="h-5 w-5" />
+                Create your account  <UserPlus className="h-5 w-5" />
               </Button>
             </Link>
             <Link to="/login">
@@ -141,7 +141,7 @@ const Home = () => {
                 variant="outline"
                 className="rounded-xl px-8 border-[color:var(--brand-indigo)]/30 border-[color:var(--brand-indigo)]/60 bg-brand-yellow backdrop-blur flex items-center justify-center gap-2"
               >
-                 I already have an account  <LogIn className="h-5 w-5" />
+                I already have an account  <LogIn className="h-5 w-5" />
               </Button>
             </Link>
           </div>
@@ -220,8 +220,8 @@ const Home = () => {
       </main>
 
       {/* ─── FOOTER ─── */}
-      <footer className="relative z-10 border-t border-border/70 bg-white/60 py-8 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-6 text-xs text-muted-foreground">
+      <footer className="relative z-10 border-t border-border/50 bg-slate-50 py-8 backdrop-blur mt-auto">
+        <div className="mx-auto max-w-6xl px-6 text-center text-lg font-semibold text-[color:var(--brand-indigo)]">
           Rise Together · A Barabari Collective project
         </div>
       </footer>
