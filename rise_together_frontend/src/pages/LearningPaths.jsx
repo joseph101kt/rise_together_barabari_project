@@ -12,21 +12,18 @@ const LearningPaths = () => {
   const [activeTab, setActiveTab] = useState("all"); // "all" or "yours"
   const [allPaths, setAllPaths] = useState([]);
   const [userPaths, setUserPaths] = useState([]);
+  const [hasFetchedUserPaths, setHasFetchedUserPaths] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch both the global modules catalog and user's enrolled modules
+  // Fetch only the global modules catalog on initial mount
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchModules = async () => {
       setLoading(true);
       setError("");
       try {
-        const [modulesRes, userModulesRes] = await Promise.all([
-          API.get("/modules"),
-          API.get("/user_modules"),
-        ]);
-        setAllPaths(modulesRes.data);
-        setUserPaths(userModulesRes.data);
+        const response = await API.get("/modules");
+        setAllPaths(response.data);
       } catch (err) {
         setError(err.response?.data?.detail || "Failed to load learning paths.");
       } finally {
@@ -34,8 +31,24 @@ const LearningPaths = () => {
       }
     };
 
-    fetchData();
+    fetchModules();
   }, []);
+
+  // Fetch user's enrolled modules only when switching to "Your Paths"
+  useEffect(() => {
+    if (activeTab === "yours" && !hasFetchedUserPaths) {
+      const fetchUserPaths = async () => {
+        try {
+          const response = await API.get("/user_modules");
+          setUserPaths(response.data);
+          setHasFetchedUserPaths(true);
+        } catch (err) {
+          setError(err.response?.data?.detail || "Failed to load your learning paths.");
+        }
+      };
+      fetchUserPaths();
+    }
+  }, [activeTab, hasFetchedUserPaths]);
 
   // Map user module progress status to their module IDs
   const userModuleStatusMap = useMemo(() => {
