@@ -13,6 +13,10 @@ class ModuleService:
         rows = self.module_repo.get_root_modules()
         return [ModuleResponse(**row) for row in rows]
 
+    def get_all_modules(self) -> list[ModuleResponse]:
+        rows = self.module_repo.get_all_modules()
+        return [ModuleResponse(**row) for row in rows]
+
     def get_module(self, module_id: int) -> ModuleResponse:
         data = self.module_repo.get_module(module_id)
         if data is None:

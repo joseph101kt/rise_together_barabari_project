@@ -10,12 +10,21 @@ router = APIRouter(prefix="/modules", tags=["Modules"])
 
 
 @router.get(
+    "/roots",
+    response_model=list[ModuleResponse],
+    summary="Get ONLY root modules (where parent_id is NULL) with their descendant trees.",
+)
+def list_root_modules(db: Session = Depends(get_db)):
+    return ModuleService(db).get_root_modules()
+
+
+@router.get(
     "",
     response_model=list[ModuleResponse],
-    summary="Get all root modules with their complete descendant trees.",
+    summary="Get ALL modules in the database with their complete descendant trees.",
 )
-def list_modules(db: Session = Depends(get_db)):
-    return ModuleService(db).get_root_modules()
+def list_all_modules(db: Session = Depends(get_db)):
+    return ModuleService(db).get_all_modules()
 
 
 @router.get(
