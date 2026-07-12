@@ -152,8 +152,8 @@ class ModuleRepository:
             {"ids": ids},
         ).mappings().all()
 
-        # ---- Step 4a: backfill missing OG metadata --------------------
-        enriched_links = [self._maybe_refresh_og(dict(row)) for row in link_rows]
+        # ---- Step 4a: backfill missing OG metadata // the backfill is takeing too long so that was removed --------------------
+        enriched_links = [(dict(row)) for row in link_rows]
 
         for row in enriched_links:
             mid = row["module_id"]
@@ -186,11 +186,6 @@ class ModuleRepository:
 
         return root
 
-    # ------------------------------------------------------------------
-    # OG helpers
-    # ------------------------------------------------------------------
-
-    def _maybe_refresh_og(self, row: dict) -> dict:
         """
         If og_title is missing, fetch OG metadata, persist it to the
         links table, and return the row with updated values.

@@ -206,6 +206,8 @@ def seed_modules(
                     db.add(ModuleSkill(module_id=module.id, skill_id=skills[slug].id))
                 else:
                     print(f"      ! unknown skill slug '{slug}' for module '{entry['title']}', skipping")
+            
+            db.commit()  
 
             db.flush()
 
@@ -235,6 +237,7 @@ def seed():
     try:
         skills = seed_skills(db, data.get("skills", []))
         users  = seed_users(db, data.get("users", []), skills)
+        db.commit()
 
         print("\nSeeding modules...")
         seed_modules(db, data.get("modules", []), skills, users)

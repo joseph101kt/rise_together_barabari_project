@@ -21,7 +21,6 @@ from datetime import datetime
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.services.link_services import LinkService
 
 
 class UserModuleRepository:
@@ -301,48 +300,7 @@ class UserModuleRepository:
             {"user_id": user_id, "module_ids": module_ids},
         ).mappings().all()
 
-        return [self._maybe_refresh_og(dict(row)) for row in rows]
-
-    def _maybe_refresh_og(self, row: dict) -> dict:
-        """
-        If og_title is missing, fetch OG metadata, persist it, and
-        return the row with updated values.
-        Skips the network call if og_title is already populated.
-        """
-        if row.get("og_title"):
-            return row
-
-        url = row.get("link_url") or row.get("url")
-        if not url:
-            return row
-
-        metadata = LinkService.fetch_metadata(url)
-
-        self.db.execute(
-            text("""
-                UPDATE links
-                SET
-                    og_title       = :og_title,
-                    og_description = :og_description,
-                    og_image       = :og_image,
-                    og_fetched_at  = :og_fetched_at
-                WHERE id = :id
-            """),
-            {
-                "id":             row["link_id"],
-                "og_title":       metadata["og_title"],
-                "og_description": metadata["og_description"],
-                "og_image":       metadata["og_image"],
-                "og_fetched_at":  metadata["fetched_at"],
-            },
-        )
-        self.db.flush()
-
-        row["og_title"]       = metadata["og_title"]
-        row["og_description"] = metadata["og_description"]
-        row["og_image"]       = metadata["og_image"]
-
-        return row
+        return [dict(row) for row in rows]
 
     def _sync_module_status(self, user_id: int, module_id: int) -> None:
         """
