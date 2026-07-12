@@ -7,22 +7,29 @@ import API from "../lib/api";
 import Loader from "../components/ui/Loader";
 
 
+// Local cache to persist data across page navigations (Stale-While-Revalidate pattern)
+let cachedAllPaths = null;
+let cachedUserPaths = null;
+
 const LearningPaths = () => {
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState("all"); // "all" or "yours"
-  const [allPaths, setAllPaths] = useState([]);
-  const [userPaths, setUserPaths] = useState([]);
-  const [hasFetchedUserPaths, setHasFetchedUserPaths] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [allPaths, setAllPaths] = useState(cachedAllPaths || []);
+  const [userPaths, setUserPaths] = useState(cachedUserPaths || []);
+  const [loading, setLoading] = useState(!cachedAllPaths);
   const [error, setError] = useState("");
 
-  // Fetch only the global modules catalog on initial mount
+  // Fetch the global modules catalog on initial mount
   useEffect(() => {
     const fetchModules = async () => {
+      if (cachedAllPaths) {
+        return; // Use cache to avoid loading spinner
+      }
       setLoading(true);
       setError("");
       try {
         const response = await API.get("/modules");
+        cachedAllPaths = response.data;
         setAllPaths(response.data);
       } catch (err) {
         setError(err.response?.data?.detail || "Failed to load learning paths.");
@@ -34,21 +41,20 @@ const LearningPaths = () => {
     fetchModules();
   }, []);
 
-  // Fetch user's enrolled modules only when switching to "Your Paths"
+  // Fetch user's enrolled modules to display enrollment/progress status
   useEffect(() => {
-    if (activeTab === "yours" && !hasFetchedUserPaths) {
-      const fetchUserPaths = async () => {
-        try {
-          const response = await API.get("/user_modules");
-          setUserPaths(response.data);
-          setHasFetchedUserPaths(true);
-        } catch (err) {
-          setError(err.response?.data?.detail || "Failed to load your learning paths.");
-        }
-      };
-      fetchUserPaths();
-    }
-  }, [activeTab, hasFetchedUserPaths]);
+    const fetchUserPaths = async () => {
+      try {
+        const response = await API.get("/user_modules");
+        cachedUserPaths = response.data;
+        setUserPaths(response.data);
+      } catch (err) {
+        console.error("Failed to load user paths in the background:", err);
+      }
+    };
+
+    fetchUserPaths();
+  }, []);
 
   // Map user module progress status to their module IDs
   const userModuleStatusMap = useMemo(() => {
