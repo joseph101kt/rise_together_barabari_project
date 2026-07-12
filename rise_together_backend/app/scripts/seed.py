@@ -6,7 +6,7 @@ Run from the project root:
 
     python -m app.scripts.seed
 
-Safe to run multiple times — uses get-or-create patterns.
+Safe to run multiple times — uses get-or-cwreate patterns.
 Every link has OG metadata fetched at seed time.
 """
 
@@ -210,7 +210,9 @@ def seed_modules(
                 if slug in skills:
                     db.add(ModuleSkill(module_id=module.id, skill_id=skills[slug].id))
                 else:
-                    logger.warning("      ! unknown skill slug '%s' for module '%s', skipping", slug, entry['title'])
+                    print(f"      ! unknown skill slug '{slug}' for module '{entry['title']}', skipping")
+            
+            db.commit()  
 
             db.flush()
 
@@ -240,6 +242,7 @@ def seed():
     try:
         skills = seed_skills(db, data.get("skills", []))
         users  = seed_users(db, data.get("users", []), skills)
+        db.commit()
 
         logger.info("Seeding modules...")
         seed_modules(db, data.get("modules", []), skills, users)

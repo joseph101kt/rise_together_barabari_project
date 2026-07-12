@@ -15,16 +15,12 @@ Tree-building strategy
 3. Fetch skills and links for all nodes in two bulk queries.
 4. Assemble nesting in Python.
 
-OG metadata
------------
-On every read, any link row with og_title IS NULL is refreshed in-place:
-the links table is updated and the fresh values are used in the response.
 """
 
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+import time
 
-from app.services.link_services import LinkService
 
 
 class ModuleRepository:
@@ -72,6 +68,8 @@ class ModuleRepository:
     # ------------------------------------------------------------------
 
     def _build_tree(self, root_id: int) -> dict | None:
+        start = time.perf_counter()
+
         # ---- Step 1: collect all node IDs via recursive CTE -----------
         id_rows = self.db.execute(
             text("""
@@ -152,10 +150,8 @@ class ModuleRepository:
             {"ids": ids},
         ).mappings().all()
 
-        # ---- Step 4a: backfill missing OG metadata --------------------
-        enriched_links = [self._maybe_refresh_og(dict(row)) for row in link_rows]
 
-        for row in enriched_links:
+        for row in link_rows: 
             mid = row["module_id"]
             if mid in nodes:
                 nodes[mid]["links"].append({
@@ -185,44 +181,6 @@ class ModuleRepository:
             node["children"].sort(key=lambda c: c.get("order_index", 0))
 
         return root
+    
 
-    # ------------------------------------------------------------------
-    # OG helpers
-    # ------------------------------------------------------------------
-
-    def _maybe_refresh_og(self, row: dict) -> dict:
-        """
-        If og_title is missing, fetch OG metadata, persist it to the
-        links table, and return the row with updated values.
-        Skips the network call if og_title is already populated.
-        """
-        if row.get("og_title"):
-            return row
-
-        metadata = LinkService.fetch_metadata(row["url"])
-
-        self.db.execute(
-            text("""
-                UPDATE links
-                SET
-                    og_title       = :og_title,
-                    og_description = :og_description,
-                    og_image       = :og_image,
-                    og_fetched_at  = :og_fetched_at
-                WHERE id = :id
-            """),
-            {
-                "id":             row["id"],
-                "og_title":       metadata["og_title"],
-                "og_description": metadata["og_description"],
-                "og_image":       metadata["og_image"],
-                "og_fetched_at":  metadata["fetched_at"],
-            },
-        )
-        self.db.flush()
-
-        row["og_title"]       = metadata["og_title"]
-        row["og_description"] = metadata["og_description"]
-        row["og_image"]       = metadata["og_image"]
-
-        return row
+    
