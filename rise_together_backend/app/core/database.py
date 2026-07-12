@@ -9,10 +9,15 @@ if db_url.startswith("postgresql://"):
 
 engine = create_engine(
     db_url,
-    echo=False,  # set True temporarily if you want to see SQL in terminal
-    pool_pre_ping=True,  # drops stale connections before using them
+    pool_pre_ping=True,       # tests connection before using it from the pool
+    pool_recycle=280,         # recycle connections before Railway's idle timeout hits
+    connect_args={
+        "keepalives": 1,
+        "keepalives_idle": 30,
+        "keepalives_interval": 10,
+        "keepalives_count": 5,
+    },
 )
-
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
